@@ -32,10 +32,14 @@ public class GyroDrive {
 
     public void function() {
         double gyroAngle = (gyro.getAngle() >= 360) ? gyro.getAngle() %= 360 : gyro.getAngle();
+        double fixedVal;
         double startVal;
         if (!isMoving && lJoy.getRawButton(leftButton)) {
             startVal = gyroAngle;
-            while (gyro.getAngle() < (startVal - 45)) {
+            if(startVal - ANGLE < 0){
+                fixedVal = startVal - ANGLE + 360;
+            }
+            while (gyro.getAngle() < (fixedVal)) {
                 frTalon.set(1);
                 brTalon.set(1);
                 flTalon.set(-1);
@@ -43,7 +47,7 @@ public class GyroDrive {
             }
         } else if (!isMoving && rJoy.getRawButton(rightButton)) {
             startVal = gyroAngle;
-            while (gyro.getAngle() < (startVal + 45)) {
+            while (gyro.getAngle() < (startVal + ANGLE)) {
                 frTalon.set(-1);
                 brTalon.set(-1);
                 flTalon.set(1);

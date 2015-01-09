@@ -12,8 +12,8 @@ public class CANDrive {
     Joystick leftJoy = new Joystick(1);
     Joystick rightJoy = new Joystick(2);
     
-    double rightVal = Hardware.rightJoy.getY();
-    double leftVal = Hardware.leftJoy.getY();
+    double rightVal = rightJoy.getY();
+    double leftVal = leftJoy.getY();
     
     public double horzSpeed = testHorzTalon.getSpeed();
     public double vertSpeed = testVertTalon.getSpeed();
@@ -22,19 +22,19 @@ public class CANDrive {
     
     
       if(leftVal > 0.1 || leftVal < -0.1){
-            Hardware.frontRightTalon.set(leftVal);
-            Hardware.backRightTalon.set(leftVal);
+            frontRightTalon.set(leftVal);
+            backRightTalon.set(leftVal);
         }else{
-            Hardware.frontRightTalon.set(0);
-            Hardware.backRightTalon.set(0);
+            frontRightTalon.set(0);
+            backRightTalon.set(0);
         }
         //same deal but for right joystick
         if(rightVal > 0.1 || rightVal < -0.1){
-            Hardware.frontLeftTalon.set(-rightVal);
-            Hardware.backLeftTalon.set(-rightVal);
+            frontLeftTalon.set(-rightVal);
+            backLeftTalon.set(-rightVal);
         }else{
-            Hardware.frontLeftTalon.set(0);
-            Hardware.backLeftTalon.set(0);
+            frontLeftTalon.set(0);
+            backLeftTalon.set(0);
         }
     
     }

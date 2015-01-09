@@ -4,19 +4,27 @@ public class testTalonPID extends PIDController{
 
     Encoder pidEncoder = new Encoder(1, 2);
     CANTalon PIDTalon = new CANTalon(3);
-    PIDController pid = new PIDController(1, 1, 1, pidEncoder, PIDTalon);
+    
+    PIDController pid = new PIDController(1, 0, 0.5, pidEncoder, PIDTalon);
 
-    public function (){
+    private double proportion,  differential;
+    
+    private boolean isEnabled = false;
+
+    public void function (){
+        if (isEnabled == true){
+            proportion = pid.getP();
+            differential = pid.getD();
+        }
         
+        PIDTalon.pidWrite(pidEncoder.pidGet());
+    }
+    
+    public void toggle() {
+        isEnabled = !isEnabled;
     }
 
-    // CANTalon liftClaw = new CANTalon(1);
     
-    // public liftClaw {
-    //   super("ClawLift", 2.0, 0.0, 0.0);
-    //   setAbsoluteTolerance(0.05);
-    //   getPIDController().setContinuous(false);
-    // }
     
 }
    

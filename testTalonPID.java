@@ -10,6 +10,6 @@ public class testTalonPID extends PIDController{
       getPIDController().setContinuous(false);
     }
     
-    
+}
    
     //probably none of this actually works

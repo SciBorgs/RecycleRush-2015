@@ -8,7 +8,13 @@ public class testTalonPID extends PIDController{
     PIDController pid = new PIDController(1, 0, 0.5, pidEncoder, PIDTalon);
 
     private double proportion,  differential;
-    
+    /*
+    kerr = setPoint - currentPoint
+    proportion = constant * kerr
+    derr = kerr - previousKerr
+    derivative = constant * derr
+    */
+
     private boolean isEnabled = false;
 
     public void function (){

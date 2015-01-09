@@ -7,14 +7,14 @@ public class testTalonPID extends PIDController{
     
     PIDController pid = new PIDController(1, 0, 0.5, pidEncoder, PIDTalon);
 
-    private double proportion,  differential;
+    private double proportion,  derivative, propError, deriError;
     /*
     kerr = setPoint - currentPoint
     proportion = constant * kerr
     derr = kerr - previousKerr
     derivative = constant * derr
     */
-
+    private double k, setpoint;
     private boolean isEnabled = false;
 
     public void function (){
@@ -22,16 +22,19 @@ public class testTalonPID extends PIDController{
             proportion = pid.getP();
             differential = pid.getD();
         }
+        propError = setpoint - proportion;
+        proportion = k * propError;
         
         PIDTalon.pidWrite(pidEncoder.pidGet());
     }
     
+    }
     public void toggle() {
         isEnabled = !isEnabled;
     }
-
     
     
 }
    
     //probably none of this actually works
+    //derreggs

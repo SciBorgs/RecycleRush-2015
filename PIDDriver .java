@@ -30,6 +30,10 @@ public class testTalonPID extends PIDController{
     
     }
     public void toggle() {
+        if (isEnabled)
+            pid.disable();
+        else
+            pid.enable();
         isEnabled = !isEnabled;
     }
     

@@ -2,43 +2,36 @@ package roboticstest;
 
 public class testTalonPID extends PIDController{
 
-    Encoder pidEncoder = new Encoder(1, 2);
-    CANTalon PIDTalon = new CANTalon(3);
+    //instatiating electronics
+    Encoder lPidEncoder = new Encoder(1, 2);
+    Encoder rPidEncoder = new Encoder(1, 2);
     
-    PIDController pid = new PIDController(1, 0, 0.5, pidEncoder, PIDTalon);
 
-    private double proportion,  derivative, propError, deriError;
-    /*
-    kerr = setPoint - currentPoint
-    proportion = constant * kerr
-    derr = kerr - previousKerr
-    derivative = constant * derr
-    */
-    private double k, setpoint;
-    private boolean isEnabled = false;
+    CANTalon frPIDTalon = new CANTalon(3);
+    CANTalon flPIDTalon = new CANTalon(4);    
+    CANTalon brPIDTalon = new CANTalon(5);
+    CANTalon blPIDTalon = new CANTalon(6);
+    
+    PIDController rPid = new PIDController(1, 0, 0.5, rPidEncoder, frPIDTalon);
+    PIDController lPid = new PIDController(1, 0, 0.5, lPidEncoder, flPIDTalon);
 
+
+    Joystick rJoy = new Joystick(5);
+    Joystick lJoy = new Joystick(6);
+
+    public void initialize(){
+        rPid.setContinuous(true);
+        lPid.setContinuous(true);
+    }
+    
     public void function (){
-        if (isEnabled == true){
-            proportion = pid.getP();
-            differential = pid.getD();
-        }
-        propError = setpoint - proportion;
-        proportion = k * propError;
         
-        PIDTalon.pidWrite(pidEncoder.pidGet());
+        rPid.setSetpoint(rJoy.getY());
+        lPid.setSetpoint(lJoy.getY());
+        
+        frPIDTalon.pidWrite(rPid.get());
+        brPIDTalon.pidWrite(rPid.get());
+        blPIDTalon.pidWrite(lPid.get());
+        flPIDTalon.pidWrite(lPid.get());
     }
-    
-    }
-    public void toggle() {
-        if (isEnabled)
-            pid.disable();
-        else
-            pid.enable();
-        isEnabled = !isEnabled;
-    }
-    
-    
 }
-   
-    //probably none of this actually works
-    //derreggs

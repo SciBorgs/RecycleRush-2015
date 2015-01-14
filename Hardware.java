@@ -1,16 +1,16 @@
 public class Hardware {
   
   //drive chassis
-  public static Talon frontRightTalon;
-  public static Talon frontLeftTalon;
-  public static Talon backRightTalon;
-  public static Talon backLeftTalon;
+  public static CANTalon frontRightTalon;
+  public static CANTalon frontLeftTalon;
+  public static CANTalon backRightTalon;
+  public static CANTalon backLeftTalon;
   public static Encoder leftEncoder;
   public static Encoder rightEncoder;
   
   //claw
-  public static Talon leftArmTalon;
-  public static Talon rightArmTalon;
+  public static CANTalon leftArmTalon;
+  public static CANTalon rightArmTalon;
   public static Encoder armEncoder;
   public static Solenoid clawSol;
   
@@ -19,14 +19,14 @@ public class Hardware {
 
   public Hardware(){
     //drive chassis hardware
-    frontLeftTalon = new Talon(1); //front left drive - channel 1
-    backLeftTalon = new Talon(2); //back left drive talon - channel 2
-    frontRightTalon = new Talon(9); //front right drive talon - channel 9
-    backRightTalon = new Talon(10); //back right drive talon - channel 10
+    frontLeftTalon = new CANTalon(1); //device ID numbers subject to change
+    frontRightTalon = new CANTalon(2); 
+    backLeftTalon = new CANTalon(3); 
+    backRightTalon = new CANTalon(4); 
     
     //claw hardware
-    leftArmTalon = new Talon(5); //left arm talon - channel 5
-    rightArmTalon = new Talon(6); //right arm talon - channel 6
+    leftArmTalon = new Talon(5); 
+    rightArmTalon = new Talon(6);
   
     
   }

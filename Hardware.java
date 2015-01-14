@@ -28,13 +28,17 @@ public class Hardware {
     backRightTalon = new CANTalon(4); 
     
     //claw hardware
-    leftArmTalon = new Talon(5); 
-    rightArmTalon = new Talon(6);
-    leftArmTalon.setFeedbackDevice(armEncoder);
-    //rightArmTalon.setFeedbackDevice(armEncoder);
-    clawSol = new DoubleSolenoid(); //
+    leftArmTalon = new CANTalon(5); 
+    rightArmTalon = new CANTalon(6);
+    armEncoder = new Encoder(1, 2); //channels subject to change to accomodate CAN
+    clawSol = new DoubleSolenoid(1, 2); //channels subject to change to accomodate CAN
     
     //miscellaneous
     compressor = new Compressor(7); //device CAN pcm ID numbers subject to change
+    
+    public void initialize() {
+      leftArmTalon.setFeedbackDevice(armEncoder);
+      rightArmTalon.setFeedbackDevice(armEncoder);
+    }
   }
 }

@@ -28,14 +28,15 @@ public class fastTurnCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
       if(leftButtonPressed && getAngle() < fixedVal){
-      Robot.hardware.frontRightTalon.set(1); 
+      	//turns robot 45 degrees to the left when leftButtonPressed is true
+			Robot.hardware.frontRightTalon.set(1); 
 			Robot.hardware.backRightTalon.set(1);
 			Robot.hardware.frontLeftTalon.set(-1);
 			Robot.hardware.backLeftTalon.set(-1);
       }
-      
+      //turns robot 45 degrees to the right when rightButtonPressed is true
       if(rightButtonPressed && getAngle < (startVal + ANGLE)){
-      Robot.hardware.frontRightTalon.set(-1);
+      			Robot.hardware.frontRightTalon.set(-1);
 			Robot.hardware.backRightTalon.set(-1);
 			Robot.hardware.frontLeftTalon.set(1);
 			Robot.hardware.backLeftTalon.set(1);

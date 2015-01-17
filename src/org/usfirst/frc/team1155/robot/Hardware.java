@@ -12,6 +12,8 @@ public enum Hardware {
 	public CameraServer camera;
 	public Gyro gyro;
 	public Encoder clawEncoder;
+	public Joystick rightJoystick;
+	public Joystick leftJoystick;
 	
 	Hardware() {
 		

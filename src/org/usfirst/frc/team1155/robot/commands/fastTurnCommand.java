@@ -15,9 +15,9 @@ public class fastTurnCommand extends Command {
     public boolean leftButtonPressed;
     public boolean rightButtonPressed;
     //^^Need to be set to a joybuton
-    public boolean isDone = false;
+    private boolean isDone = false;
     private static final double ANGLE = 45;
-    public static final double BUFFER = 5;
+    private static final double BUFFER = 5;
     private static final double MIN_SPEED = 0.5, MAX_SPEED = 1;
     
     

@@ -10,7 +10,7 @@ public enum Hardware {
 	public Solenoid claw;
 	public Ultrasonic left, right, front;
 	public CameraServer camera;
-	public Gyro gryo;
+	public Gyro gyro;
 	public Encoder clawEncoder;
 	
 	Hardware() {

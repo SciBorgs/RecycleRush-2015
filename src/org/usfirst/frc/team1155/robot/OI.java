@@ -1,6 +1,10 @@
 package org.usfirst.frc.team1155.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
+
 import org.usfirst.frc.team1155.robot.commands.ExampleCommand;
 
 /**

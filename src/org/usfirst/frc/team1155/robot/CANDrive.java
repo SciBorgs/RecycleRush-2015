@@ -10,10 +10,11 @@ public class CANDrive {
     //method to set speed values
     public void setSpeed(double leftVal, double rightVal) {
     	leftSpeed = leftVal; //speed to set to the left talons
-    	rightSpeed = rightVal; //spped to set to the right talons
+    	rightSpeed = rightVal; //speed to set to the right talons
     	
-    	//sets the speed relative to joystick position
-    	//uses 0.1 as a buffer in case the joystick moves very slightly
+    	/*sets the speed relative to joystick position
+    	 *uses 0.1 as a buffer in case the joystick moves very slightly
+    	 */
     	if(leftSpeed > 0.1 || leftSpeed < -0.1){
     		//sets talons to input speed
             Robot.hardware.frontLeftTalon.set(leftSpeed);

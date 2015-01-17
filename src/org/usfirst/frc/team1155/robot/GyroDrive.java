@@ -12,9 +12,6 @@ public class GyroDrive {
 	double fixedVal = 0;
 	double startVal = 0;
 
-	// Variables to be used in quick turning
-	private boolean isMoving = true; // Checks if robot is in motion (already turning)
-
 	// Starts everything
 	public void start() {
 		Robot.hardware.gyro.initGyro(); // Resets gyro value to 0

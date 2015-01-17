@@ -3,15 +3,22 @@ package org.usfirst.frc.team1155.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team1155.robot.Robot;
-
-//Written by Lucas
+//
+/*Written by Lucas*/
+//
+//sensor subsytem may need name change once its actually written
+//Joystick buttons not initialized 
+//Buttons need to be set to rightButtonPressed & leftButtonPressed 
 
 public class fastTurnCommand extends Command {
+    //
     public boolean leftButtonPressed;
     public boolean rightButtonPressed;
+    //^^Need to be set to a joybuton
+    public boolean isDone = false;
     private static final double ANGLE = 45;
-	  public static final double BUFFER = 5;
-	  private static final double MIN_SPEED = 0.5, MAX_SPEED = 1;
+    public static final double BUFFER = 5;
+    private static final double MIN_SPEED = 0.5, MAX_SPEED = 1;
     
     
     public fastTurnCommand() {
@@ -41,6 +48,10 @@ public class fastTurnCommand extends Command {
 			Robot.hardware.frontLeftTalon.set(1);
 			Robot.hardware.backLeftTalon.set(1);
       }
+    	
+      else if (!(getAngle() < (startVal + ANGLE)) && !(getAngle() < fixedVal)){
+      	isFinished(true);
+      }	
     }
     
     //sets angles to use in fast turn 
@@ -55,8 +66,8 @@ public class fastTurnCommand extends Command {
     }
     
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
+    protected boolean isFinished(isDone) {
+        return isDone;
     }
 
     // Called once after isFinished returns true

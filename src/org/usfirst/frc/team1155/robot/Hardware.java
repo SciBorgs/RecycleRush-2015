@@ -13,6 +13,14 @@ public enum Hardware {
 	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
 //	public CameraServer camera;
 	public Gyro gyro;
+	public CANTalon winchTalon1, winchTalon2;
+	public Solenoid claw;
+	public Ultrasonic left, right, front;
+	public CameraServer camera;
+	public Gyro gyro;
+	public Encoder clawEncoder;
+	public Joystick rightJoystick;
+	public Joystick leftJoystick;
 	
 	Hardware() {
 		//drive

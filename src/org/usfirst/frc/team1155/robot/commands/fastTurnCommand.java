@@ -59,8 +59,8 @@ public class fastTurnCommand extends Command {
     //sets angles to use in fast turn 
     //fixes bad numbers from gyro
     public void setAngles(){
-    startVal = (Robot.hardware.gyro.getAngle() >= 360) ? Robot.hardware.gyro.getAngle() % 360 : Robot.hardware.gyro.getAngle();
-    fixedVal = (startVal - ANGLE < 0) ? startVal - ANGLE + 360 : startVal - ANGLE;
+    private double startVal = (Robot.hardware.gyro.getAngle() >= 360) ? Robot.hardware.gyro.getAngle() % 360 : Robot.hardware.gyro.getAngle();
+    private double fixedVal = (startVal - ANGLE < 0) ? startVal - ANGLE + 360 : startVal - ANGLE;
     }
     
     public double getAngle(){

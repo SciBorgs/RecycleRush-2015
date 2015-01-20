@@ -10,8 +10,12 @@ public class SophomoreTestCommand extends Command{
     private double yVal;
     private double xVal;
     
-    private double oldAccel = 0;
-    private double currentAccel = 0;
+    private double oldXAccel = 0;
+    private double oldYAccel = 0;
+    
+    private double currentXAccel = 0;
+    private double currentYAccel = 0;
+    
     private double changeInXAccel = 0;
     private double changeInYAccel = 0;
     
@@ -37,20 +41,19 @@ public class SophomoreTestCommand extends Command{
 		timer.start();
 		
 		//gets the change in acceleration over the x axis after one tick
-		oldAccel = currentAccel;
-		currentAccel = accel.getX();
-		changeInXAccel = currentAccel - oldAccel;
+		oldXAccel = currentXAccel;
+		oldYAccel = currentYAccel;
+		
+		currentXAccel = accel.getX();
+		currentYAccel = accel.getY();
+		
+		changeInXAccel = currentXAccel - oldXAccel;
+		changeInYAccel = currentYAccel - oldYAccel;
 		
 		xDisplacement = getDisplacement(changeInXAccel, changeInTime);
-		
-		//gets the change in acceleration over the y axis after one tick
-		oldAccel = currentAccel;
-		currentAccel = accel.getY();
-		changeInYAccel = currentAccel - oldAccel;
-		
 		yDisplacement = getDisplacement(changeInYAccel, changeInTime);
 
-	    currentTime = timer.get();
+	    	currentTime = timer.get();
 		changeInTime = currentTime - oldTime;
 	}
 

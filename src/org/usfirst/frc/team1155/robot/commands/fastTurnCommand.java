@@ -8,7 +8,7 @@ import org.usfirst.frc.team1155.robot.Robot;
 //
 public class fastTurnCommand extends Command {
   
-    public boolean leftButtonPressed);
+    public boolean leftButtonPressed;
     public boolean rightButtonPressed;
   
     private boolean isDone = false;

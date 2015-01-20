@@ -12,9 +12,9 @@ import org.usfirst.frc.team1155.robot.Robot;
 
 public class fastTurnCommand extends Command {
     //
-    public boolean leftButtonPressed;
+    public boolean leftButtonPressed);
     public boolean rightButtonPressed;
-    //^^Need to be set to a joybuton
+    //^^Needs to be initialized extrnally
     private boolean isDone = false;
     private static final double ANGLE = 45;
     private static final double BUFFER = 5;
@@ -30,6 +30,8 @@ public class fastTurnCommand extends Command {
     @Override
     protected void initialize() {
     Robot.hardware.gyro.initGyro();
+    leftButtonPressed = = Robot.hardware.leftJoy.getRawButton(1)
+    rightButtonPressed = Robot.hardware.rightJoy.getRawButton(2);
     setAngles();
     }
 

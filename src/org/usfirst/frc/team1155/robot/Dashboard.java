@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Dashboard {
   public void initialize() {
     //declare hardware components to interact with --> moved to Hardware class later
-    BuiltInAccelerometer accelerometer = new BuiltInAccelerometer();
+    AccelerometerCommand command = new AccelerometerCommand();
     Gyro gyro = new Gyro();
     Ultrasonic sonic = new UltraSonic()
     
@@ -15,9 +15,10 @@ public class Dashboard {
     
     //RoboRIO builtin accelerometer
     SmartDashboard.putString("Accelerometer Data", new String(""));
-    SmartDashboard.putNumber("X: ", accelerometer.getX());
-    SmartDashboard.putNumber("Y: ", accelerometer.getY());
-    SmartDashboard.putNumber("Z: ", accelerometer.getZ());
+    SmartDashboard.putNumber("X: ", command.getX());
+    SmartDashboard.putNumber("Y: ", command.getY());
+    SmartDashboard.putNumber("Z: ", command.getZ());
+    SmartDashboard.putNumber("Distance: ", command.returnDistance());
     
     //gyro angle
     SmartDashboard.putString("Gyro Data", new String(""));

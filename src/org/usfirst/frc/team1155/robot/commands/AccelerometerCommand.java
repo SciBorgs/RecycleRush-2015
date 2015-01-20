@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 //This is a command that can be used to move forward slightly
-public class SophomoreTestCommand extends Command{
+public class AccelerometerCommand extends Command{
 	
     private double oldYAccel = 0;
     
@@ -50,6 +50,18 @@ public class SophomoreTestCommand extends Command{
 	
 	public double returnDistance() {
 		return distance;
+	}
+	
+	public double getX() {
+		return accel.getX();
+	}
+	
+	public double getY() {
+		return accel.getY();
+	}
+	
+	public double getZ() {
+		return accel.getZ();
 	}
 	
 	@Override

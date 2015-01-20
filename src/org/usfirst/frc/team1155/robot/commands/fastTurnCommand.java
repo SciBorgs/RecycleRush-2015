@@ -6,15 +6,11 @@ import org.usfirst.frc.team1155.robot.Robot;
 //
 /*Written by Lucas*/
 //
-//sensor subsytem may need name change once its actually written
-//Joystick buttons not initialized 
-//Buttons need to be set to rightButtonPressed & leftButtonPressed 
-
 public class fastTurnCommand extends Command {
-    //
+  
     public boolean leftButtonPressed);
     public boolean rightButtonPressed;
-    //^^Needs to be initialized extrnally
+  
     private boolean isDone = false;
     private static final double ANGLE = 45;
     private static final double BUFFER = 5;
@@ -23,6 +19,7 @@ public class fastTurnCommand extends Command {
     
     public fastTurnCommand() {
         // Use requires() here to declare subsystem dependencies
+        //sensorSubsystem does not actually exist
         requires(Robot.sensorSubsystem);
     }
 

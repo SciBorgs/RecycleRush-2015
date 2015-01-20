@@ -44,12 +44,20 @@ public class AccelerometerCommand extends Command{
 		currentTime = timer.get();
 		changeInTime = currentTime - oldTime;
 		
-		distance = changeInYAccel * changeInTime * changeInTime;
+		distance = changeInYAccel * changeInTime * changeInTime * 9.8; //In meters 
 		speed = distance/changeInTime;
 	}
 	
 	public double returnDistance() {
 		return distance;
+	}
+	
+	public double getXCoordinate() {
+		return Math.cos(90-Robot.hardware.gyro.get()) * returnDistance();
+	}
+	
+	public double getYCoordinate() {
+		return Math.sin(90-Robot.hardware.gyro.get()) * returnDistance();
 	}
 	
 	public double getX() {

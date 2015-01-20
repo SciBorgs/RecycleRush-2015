@@ -12,7 +12,6 @@ public enum Hardware {
 	public Solenoid clawSolenoid;
 	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
 //	public CameraServer camera;
-	public Gyro gyro;
 	public CANTalon winchTalon1, winchTalon2;
 	public Solenoid claw;
 	public Ultrasonic left, right, front;

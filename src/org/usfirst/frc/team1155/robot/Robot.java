@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team1155.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1155.robot.subsystems.Autonomous;
 import org.usfirst.frc.team1155.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -18,10 +20,15 @@ import org.usfirst.frc.team1155.robot.subsystems.ExampleSubsystem;
 public class Robot extends IterativeRobot {
 	public static Hardware hardware;
 	
-	
 	public void robotInit() {
 		OI oi = new OI();
 		hardware = Hardware.INSTANCE;
+		
+		Autonomous auto = new Autonomous(getRoutineValue());
+	}
+	
+	private int getRoutineValue() {
+		return 2;
 	}
 	
 	public void disabledInit() {}

@@ -16,7 +16,7 @@ public class ExampleSubsystem extends Subsystem {
 	ExampleCommand command;
 	
 	public ExampleSubsystem() {
-		command = new ExampleCommand(this);
+		command = new ExampleCommand();
 	}
 	
     public void initDefaultCommand() {
@@ -25,7 +25,6 @@ public class ExampleSubsystem extends Subsystem {
     
     public void goToHeight(int height) {
     	if(command.isRunning()) command.cancel();
-    	command.setTargetHeight(height);
     	command.start();
     }
 }

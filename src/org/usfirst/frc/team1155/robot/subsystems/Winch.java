@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Winch extends Subsystem {
+	
 	private final double TOTE_HEIGHT = 190101, BIN_HEIGHT = 101494; //where Winch should go before closing
-	WinchSet winchCommand;
+	private WinchSet winchCommand;
+	
 	public Winch() {
 		winchCommand = new WinchSet(this);
 		//add more commands later

@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+
+import org.usfirst.frc.team1155.robot.Robot;
+
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,6 +24,9 @@ public class AccelerometerCommand extends Command{
     
     private double speed;
     
+    private double initAngle;
+    private double currentAngle;
+    
     Timer timer;
 	BuiltInAccelerometer accel;
 
@@ -30,11 +36,25 @@ public class AccelerometerCommand extends Command{
 		timer = new Timer();
 		timer.start();
 	}
-
+	//This method waits until the robot stops turning and then returns 'initAngle'
+	public double getInitAngle(){
+		while(Robot.hardware.gyro.getRate() != 0){
+			initAngle = Robot.hardware.gyro.getAngle();
+		}
+		return initAngle;
+	}
+	//Updates 'currentAngle'until the robot moves straight or stops then returns the value
+	public double getCurrAngle(){
+		while(accel.getX() == 0){
+			currentAngle = Robot.hardware.gyro.getAngle();
+			//new rotated angle = getAngle - current angle
+		}
+		return currentAngle;
+	}
 	@Override
 	protected void execute() {
 		oldTime = currentTime;
-		
+				
 		oldYAccel = currentYAccel;
 		
 		currentYAccel = accel.getY();
@@ -44,12 +64,21 @@ public class AccelerometerCommand extends Command{
 	    currentTime = timer.get();
 		changeInTime = currentTime - oldTime;
 		
-		distance = changeInYAccel * changeInTime * changeInTime;
+		distance = changeInYAccel * changeInTime * changeInTime * 9.81;		
+		
 		speed = distance/changeInTime;
 	}
 	
 	public double returnDistance() {
 		return distance;
+	}
+	
+	public double getXCoordinate() {
+		return Math.sin(getInitAngle()) * distance;
+	}
+	
+	public double getYCoordinate() {
+		return Math.cos(getInitAngle()) * distance;
 	}
 	
 	public double getX() {
@@ -64,6 +93,13 @@ public class AccelerometerCommand extends Command{
 		return accel.getZ();
 	}
 	
+/*
+	public double getInitAngle(){
+		return Robot.hardware.gyro.getAngle();
+		
+	}
+*/
+		
 	@Override
 	protected void end() {
 		

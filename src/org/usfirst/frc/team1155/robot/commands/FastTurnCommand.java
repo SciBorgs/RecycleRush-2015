@@ -6,7 +6,7 @@ import org.usfirst.frc.team1155.robot.Robot;
 //
 /*Written by Lucas*/
 //
-public class fastTurnCommand extends Command {
+public class FastTurnCommand extends Command {
   
     public boolean leftButtonPressed;
     public boolean rightButtonPressed;

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1155.robot;
 
+import org.usfirst.frc.team1155.robot.commands.Encoder;
+
 import edu.wpi.first.wpilibj.*;
 
 public enum Hardware {

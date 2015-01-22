@@ -67,7 +67,7 @@ public class AccelerometerCommand extends Command{
 		changeInTime = currentTime - oldTime;
 		
 		distance = changeInYAccel * changeInTime * changeInTime * 9.81;
-		totalDistance += changeInYAccel * changeInTime * changeInTime * 9.81;
+		totalDistance += distance;
 		
 		speed = distance/changeInTime;
 	}

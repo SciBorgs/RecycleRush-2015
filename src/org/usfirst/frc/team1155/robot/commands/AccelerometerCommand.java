@@ -21,6 +21,7 @@ public class AccelerometerCommand extends Command{
     private double changeInTime = 0;
     
     private double distance;
+    private double totalDistance;
     
     private double speed;
     
@@ -35,6 +36,7 @@ public class AccelerometerCommand extends Command{
 		accel = new BuiltInAccelerometer();
 		timer = new Timer();
 		timer.start();
+		distance = totalDistance = 0;
 	}
 	//This method waits until the robot stops turning and then returns 'initAngle'
 	public double getInitAngle(){
@@ -64,7 +66,8 @@ public class AccelerometerCommand extends Command{
 	    currentTime = timer.get();
 		changeInTime = currentTime - oldTime;
 		
-		distance = changeInYAccel * changeInTime * changeInTime * 9.81;		
+		distance = changeInYAccel * changeInTime * changeInTime * 9.81;
+		totalDistance += changeInYAccel * changeInTime * changeInTime * 9.81;
 		
 		speed = distance/changeInTime;
 	}

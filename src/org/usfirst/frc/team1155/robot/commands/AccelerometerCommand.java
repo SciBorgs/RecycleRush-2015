@@ -76,6 +76,10 @@ public class AccelerometerCommand extends Command{
 		return distance;
 	}
 	
+	public double returnTotalDistance() {
+		return totalDistance;
+	}
+	
 	public double getXCoordinate() {
 		return Math.sin(getInitAngle()) * distance;
 	}

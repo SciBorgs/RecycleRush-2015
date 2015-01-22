@@ -1,22 +1,29 @@
 package org.usfirst.frc.team1155.robot.subsystems;
 
+import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Claw extends Subsystem {
+	
+	private Solenoid claw;
+	
 	public Claw() {
+		claw = Hardware.INSTANCE.claw;
+	}
+	
+	public void close() {
 		
 	}
 	
 	public void open() {
+		
 	}
 	
-	public void close() {
-	}
-	
-	public boolean isOpen() {
-		return Robot.hardware.clawSolenoid.get();
+	public void get() {
+		
 	}
 	
 	@Override

@@ -7,19 +7,14 @@ public enum Hardware {
 	
 	
 	public CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
-	public CANTalon leftWinchTalon, rightWinchTalon;
-	public Encoder winchEncoder;
-	public Solenoid clawSolenoid;
+	public CANTalon leftElevatorTalon, rightElevatorTalon;
+	public Encoder elevatorEncoder;
 	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
 //	public CameraServer camera;
-	public CANTalon winchTalon1, winchTalon2;
 	public Solenoid claw;
-	public Ultrasonic left, right, front;
 	public CameraServer camera;
 	public Gyro gyro;
-	public Encoder clawEncoder;
-	public Joystick rightJoystick;
-	public Joystick leftJoystick;
+	public Joystick rightJoystick, leftJoystick;
 	
 	Hardware() {
 		//drive

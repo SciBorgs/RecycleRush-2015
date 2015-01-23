@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Winch extends Subsystem {
-	
+	////OUTDATED////
 	private final double TOTE_HEIGHT = 190101, BIN_HEIGHT = 101494; //where Winch should go before closing
 	private WinchSet winchCommand;
 	

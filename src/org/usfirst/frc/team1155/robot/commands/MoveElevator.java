@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Hardware;
+import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,38 +11,34 @@ public class MoveElevator extends Command {
 	private CANTalon leftElevatorTalon, rightElevatorTalon;
 	private float targetHeight;
 	
-	public MoveElevator() {
+	public MoveElevator(Winch subsystem) {
 		leftElevatorTalon = Hardware.INSTANCE.leftElevatorTalon;
-		leftElevatorTalon = Hardware.INSTANCE.leftElevatorTalon;
+		rightElevatorTalon = Hardware.INSTANCE.rightElevatorTalon;
+		requires(subsystem);
 	}
 	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	protected void end() {
-		if
-
+		
 	}
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
 
 	}
 	

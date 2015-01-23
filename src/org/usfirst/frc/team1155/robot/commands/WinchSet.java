@@ -7,7 +7,7 @@ import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.ExampleSubsystem;
 
 public class WinchSet extends Command {
-	//constants
+	//////OUTDATED///////
 	private final double BUFFER = 10; //change number to actual value later
 	
 	//fields

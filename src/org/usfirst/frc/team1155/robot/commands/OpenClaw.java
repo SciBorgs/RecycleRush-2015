@@ -1,25 +1,29 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+import org.usfirst.frc.team1155.robot.Hardware;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class OpenClaw extends Command {
-
+	private Solenoid clawSolenoid;
+	public OpenClaw() {
+		clawSolenoid = Hardware.INSTANCE.clawSolenoid;
+	}
+	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
-
+		clawSolenoid.set(true);
 	}
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		return clawSolenoid.get();
 	}
 
 	@Override

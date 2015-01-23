@@ -18,11 +18,9 @@ import org.usfirst.frc.team1155.robot.subsystems.ExampleSubsystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	public static Hardware hardware;
 	
 	public void robotInit() {
 		OI oi = new OI();
-		hardware = Hardware.INSTANCE;
 		
 		Autonomous auto = new Autonomous(getRoutineValue());
 	}

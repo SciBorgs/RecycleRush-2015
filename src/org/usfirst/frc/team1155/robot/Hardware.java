@@ -11,7 +11,7 @@ public enum Hardware {
 	public Encoder elevatorEncoder;
 	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
 //	public CameraServer camera;
-	public Solenoid claw;
+	public Solenoid clawSolenoid;
 	public CameraServer camera;
 	public Gyro gyro;
 	public Joystick rightJoystick, leftJoystick;
@@ -31,7 +31,7 @@ public enum Hardware {
 		//leftUltrasonic = new Ultrasonic()
 		
 		//claw
-		claw = new Solenoid(0, 1); //change channel to accommodate Pneumatics Control Module
+		clawSolenoid = new Solenoid(0, 1); //change channel to accommodate Pneumatics Control Module
 
 	}
 		

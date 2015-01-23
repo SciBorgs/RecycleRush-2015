@@ -34,7 +34,7 @@ public class MoveElevator extends Command {
 
 	@Override
 	protected void end() {
-		
+
 	}
 
 	@Override

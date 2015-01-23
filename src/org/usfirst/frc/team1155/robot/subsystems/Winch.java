@@ -17,7 +17,7 @@ public class Winch extends Subsystem {
 	}
 	
 	public double getHeight() {
-		return Robot.hardware.winchEncoder.getDistance(); //change to actual useful method later
+		return Robot.hardware.elevatorEncoder.getDistance(); //change to actual useful method later
 	}
 	
 	public void set(double targetHeight) {

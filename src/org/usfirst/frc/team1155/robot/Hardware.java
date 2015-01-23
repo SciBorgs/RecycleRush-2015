@@ -24,14 +24,14 @@ public enum Hardware {
 		backRightTalon = new CANTalon(4);
 		
 		//winch
-		leftWinchTalon = new CANTalon(5);
-		rightWinchTalon = new CANTalon(6);
-		winchEncoder = new Encoder(0,1); //change channels later
+		leftElevatorTalon = new CANTalon(5);
+		rightElevatorTalon = new CANTalon(6);
+		elevatorEncoder = new Encoder(0,1); //change channels later
 		
 		//leftUltrasonic = new Ultrasonic()
 		
 		//claw
-		clawSolenoid = new Solenoid(0, 1); //change channel to accommodate Pneumatics Control Module
+		claw = new Solenoid(0, 1); //change channel to accommodate Pneumatics Control Module
 
 	}
 		

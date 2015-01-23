@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1155.robot.subsystems;
 
+import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.commands.WinchSet;
 
@@ -14,7 +15,7 @@ public class Winch extends Subsystem {
 	}
 	
 	public double getHeight() {
-		return Robot.hardware.elevatorEncoder.getDistance(); //change to actual useful method later
+		return Hardware.INSTANCE.elevatorEncoder.getDistance();
 	}
 	
 	public void set(double targetHeight) {

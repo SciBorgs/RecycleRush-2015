@@ -7,7 +7,7 @@ public enum Hardware {
 	
 	
 	public CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
-	public CANTalon leftElevatorTalon, rightElevatorTalon;
+	public CANTalon elevatorMainTalon, elevatorAssistTalon;
 	public Encoder elevatorEncoder;
 	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
 //	public CameraServer camera;
@@ -24,8 +24,8 @@ public enum Hardware {
 		backRightTalon = new CANTalon(4);
 		
 		//winch
-		leftElevatorTalon = new CANTalon(5);
-		rightElevatorTalon = new CANTalon(6);
+		elevatorMainTalon = new CANTalon(5)
+		elevatorAssistTalon = new CANTalon(6);
 		elevatorEncoder = new Encoder(0,1); //change channels later
 		
 		//leftUltrasonic = new Ultrasonic()

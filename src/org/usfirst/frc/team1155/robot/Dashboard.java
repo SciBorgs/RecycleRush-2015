@@ -1,31 +1,55 @@
 package org.usfirst.frc.team1155.robot;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.tables.ITable;
+import edu.wpi.first.wpilibj.tables.ITableListener;
 
-public class Dashboard {
+public class Dashboard extends Command {
+	BuiltInAccelerometer accel;
+	SmartDashboard dash;
+	SendableChooser accelval;
   public void initialize() {
     //declare hardware components to interact with --> moved to Hardware class later
-    AccelerometerCommand command = new AccelerometerCommand();
-    Gyro gyro = new Gyro();
-    Ultrasonic sonic = new UltraSonic()
     
     //Hardware hardware = new Hardware();
     //getGyro, getUltrasonic --> return objects
     
     //RoboRIO builtin accelerometer
-    SmartDashboard.putString("Accelerometer Data", new String(""));
-    SmartDashboard.putNumber("X: ", command.getX());
-    SmartDashboard.putNumber("Y: ", command.getY());
-    SmartDashboard.putNumber("Z: ", command.getZ());
-    SmartDashboard.putNumber("Distance: ", command.returnDistance());
     
-    //gyro angle
-    SmartDashboard.putString("Gyro Data", new String(""));
-    SmartDashboard.putNumber("Angle: ",gyro.getAngle());
-    
-    //ultrasonic
-    SmartDashboard.putString("Ultrasonic Data", new String(""));
-    SmartDashboard.putNumber("Distance",sonic.getDistanceUnits());
+    accelval = new SendableChooser();
+	dash = new SmartDashboard();
+    accel = new BuiltInAccelerometer();
+    ITable t;
+    ITableListener l;
+    t.addSubTableListener(l);
+    SendableChooser.initTable(t);
   }
+
+@Override
+protected void execute() {
+	dash.putNumber("X-Value", accel.getX());
+	dash.putNumber("Y-Value", accel.getY());
+	dash.putNumber("Z-Value", accel.getZ());
+}
+
+@Override
+protected boolean isFinished() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+protected void end() {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+protected void interrupted() {
+	// TODO Auto-generated method stub
+	
+}
 }

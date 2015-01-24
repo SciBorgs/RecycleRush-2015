@@ -1,8 +1,7 @@
 package org.usfirst.frc.team1155.robot;
 
-import org.usfirst.frc.team1155.robot.commands.Encoder;
-
 import edu.wpi.first.wpilibj.*;
+
 
 public enum Hardware {
   
@@ -15,6 +14,7 @@ public enum Hardware {
   public CANTalon backLeftTalon;
   public Encoder leftEncoder;
   public Encoder rightEncoder;
+  public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
   
   //claw
   public CANTalon leftArmTalon;
@@ -52,6 +52,8 @@ public enum Hardware {
     compressor = new Compressor(7); //device CAN pcm ID numbers subject to change
     
     gyro = new Gyro(1);
+    
+    
     
     /*public void intialize() {
       leftArmTalon.setFeedbackDevice(armEncoder);

@@ -1,11 +1,11 @@
-package org.usfirst.frc.team1155.robot.commands;
+/*package org.usfirst.frc.team1155.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team1155.robot.Robot;
 
 //
-/*Written by Lucas*/
+Written by Lucas
 //
 public class FastTurnCommand extends Command {
 
@@ -20,14 +20,14 @@ public class FastTurnCommand extends Command {
 	public FastTurnCommand() {
 		// Use requires() here to declare subsystem dependencies
 		// sensorSubsystem does not actually exist
-		requires(Robot.sensorSubsystem);
+		//requires(Robot.sensorSubsystem);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
     protected void initialize() {
     Robot.hardware.gyro.initGyro();
-    leftButtonPressed = Robot.hardware.leftJoy.getRawButton(1)
+    leftButtonPressed = Robot.hardware.leftJoy.getRawButton(1);
     rightButtonPressed = Robot.hardware.rightJoy.getRawButton(2);
     setAngles();
     }
@@ -83,4 +83,4 @@ public class FastTurnCommand extends Command {
 	@Override
 	protected void interrupted() {
 	}
-}
+}*/

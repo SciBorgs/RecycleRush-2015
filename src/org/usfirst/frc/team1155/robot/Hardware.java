@@ -24,7 +24,7 @@ public enum Hardware {
 		backRightTalon = new CANTalon(4);
 		
 		//winch
-		elevatorMainTalon = new CANTalon(5)
+		elevatorMainTalon = new CANTalon(5);
 		elevatorAssistTalon = new CANTalon(6);
 		elevatorEncoder = new Encoder(0,1); //change channels later
 		

@@ -31,7 +31,8 @@ public class MoveElevator extends Command {
 	
 	@Override
 	protected void initialize() {
-		
+		mainTalon.enableControl();
+		assistTalon.enableControl();
 	}
 
 	@Override
@@ -47,12 +48,14 @@ public class MoveElevator extends Command {
 
 	@Override
 	protected void end() {
-
+		mainTalon.disableControl();
+		assistTalon.disableControl();
 	}
 
 	@Override
 	protected void interrupted() {
-
+		mainTalon.disableControl();
+		assistTalon.disableControl();
 	}
 	
 	protected void setHeight(float height) {

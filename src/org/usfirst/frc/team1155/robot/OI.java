@@ -9,13 +9,20 @@ import org.usfirst.frc.team1155.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	public boolean rightFastTurn;
+	public boolean leftFastTurn;
 	public OI(){
-		
+	rightFastTurn = false;
+	leftFastTurn = false;
 		if(Robot.hardware.leftJoy.getRawButton(1)){
+			leftFastTurn = true;
+			new FastTurnCommand();
 			
 		}
 	
 		if(Robot.hardware.rightJoy.getRawButton(2)){
+			rightFastTurn = true;
+			new FastTurnCommand();
 			
 		}
 	}

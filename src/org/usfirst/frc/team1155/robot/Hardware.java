@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1155.robot;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 public enum Hardware {
@@ -29,6 +31,9 @@ public enum Hardware {
   public DriverStation dLCD;
   
   public Joystick leftJoy, rightJoy;
+  
+  public Button leftFastTurn = new JoystickButton(leftJoy, 1);
+  public Button rightFastTurn = new JoystickButton(rightJoy, 1);
   
   public Gyro gyro;
   

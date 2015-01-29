@@ -2,30 +2,21 @@ package org.usfirst.frc.team1155.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
-import org.usfirst.frc.team1155.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1155.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public boolean rightFastTurn;
-	public boolean leftFastTurn;
-	public OI(){
-	rightFastTurn = false;
-	leftFastTurn = false;
-		if(Robot.hardware.leftJoy.getRawButton(1)){
-			leftFastTurn = true;
-			new FastTurnCommand();
-			
-		}
 	
-		if(Robot.hardware.rightJoy.getRawButton(2)){
-			rightFastTurn = true;
-			new FastTurnCommand();
-			
-		}
+	public OI(){
+		//parameters passed into FastTurnCommand are used to pick the direction within the command
+		Robot.hardware.leftFastTurn.whenPressed(new FastTurnCommand(true));
+		Robot.hardware.rightFastTurn.whenPressed(new FastTurnCommand(false));
+		
 	}
+	
 	//// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button

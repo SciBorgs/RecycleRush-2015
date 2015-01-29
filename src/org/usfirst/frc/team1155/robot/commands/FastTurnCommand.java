@@ -2,9 +2,7 @@ package org.usfirst.frc.team1155.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1155.robot.Robot;
-
-import org.usfirst.frc.team1155.robot.SophomoreOI;
+import org.usfirst.frc.team1155.robot.*;
 
 
 
@@ -13,9 +11,7 @@ import org.usfirst.frc.team1155.robot.SophomoreOI;
 //
 public class FastTurnCommand extends Command {
 
-	
-
-	private boolean isDone = false;
+	private boolean isDone;
 	//Not sure why we need these constants??
 	private static final double ANGLE = 45;
 	private static final double BUFFER = 5;
@@ -24,43 +20,51 @@ public class FastTurnCommand extends Command {
 	private double fixedVal;
 	private double startVal;
 	
-	boolean leftFastTurn = Robot.hardware.leftJoy.getRawButton(1);
-	boolean rightFastTurn = Robot.hardware.rightJoy.getRawButton(2);
+	//direction of turn
+	boolean left;
+	boolean right;
 	
-	public FastTurnCommand() {
-		// Use requires() here to declare subsystem dependencies
-		// sensorSubsystem does not actually exist
-		//requires(Robot.sensorSubsystem);
+	public FastTurnCommand(boolean turnLeft) {
+		if(turnLeft) {
+			left = true;
+		}else if(!turnLeft) {
+			right = true;
+		}
 	}
 
 	// Called just before this Command runs the first time
 	@Override
     protected void initialize() {
-    Robot.hardware.gyro.initGyro();
-    setAngles();
+		Robot.hardware.gyro.initGyro();
+		setAngles();
     }
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if (leftFastTurn && getAngle() < fixedVal) {
-			// turns robot 45 degrees to the left when leftFastTurn is true
-			Robot.hardware.frontRightTalon.set(1);
-			Robot.hardware.backRightTalon.set(1);
-			Robot.hardware.frontLeftTalon.set(-1);
-			Robot.hardware.backLeftTalon.set(-1);
-		}
-		// turns robot 45 degrees to the right when rightFastTurn is true
-		if (rightFastTurn && getAngle() < (startVal + ANGLE)) {
-			Robot.hardware.frontRightTalon.set(-1);
-			Robot.hardware.backRightTalon.set(-1);
-			Robot.hardware.frontLeftTalon.set(1);
-			Robot.hardware.backLeftTalon.set(1);
+		
+		
+		
+		if(!isDone) {
+			if (left && getAngle() < fixedVal) {
+				// turns robot 45 degrees to the left when left is true
+				Robot.hardware.frontRightTalon.set(1);
+				Robot.hardware.backRightTalon.set(1);
+				Robot.hardware.frontLeftTalon.set(-1);
+				Robot.hardware.backLeftTalon.set(-1);
+			}
+			// turns robot 45 degrees to the right when right is true
+			if (right && getAngle() < (startVal + ANGLE)) {
+				Robot.hardware.frontRightTalon.set(-1);
+				Robot.hardware.backRightTalon.set(-1);
+				Robot.hardware.frontLeftTalon.set(1);
+				Robot.hardware.backLeftTalon.set(1);
+			}
+			else {
+				isDone = true;
+			}
 		}
 
-		else if (!(getAngle() < (startVal + ANGLE)) && !(getAngle() < fixedVal)) {
-			isFinished();
-		}
 	}
 
 	// sets angles to use in fast turn

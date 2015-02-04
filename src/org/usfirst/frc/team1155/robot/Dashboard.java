@@ -25,7 +25,7 @@ public class Dashboard extends Command {
     ITable t;
     ITableListener l;
     t.addSubTableListener(l);
-    SendableChooser.initTable(t);
+    //SendableChooser.initTable(t);
   }
 
 @Override

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1155.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -48,6 +50,11 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        int port = 3; //port number for first analog input
+        for(int i = 0; i < Robot.hardware.analogInput.length; i++) {
+        	Robot.hardware.analogInput[i] = new AnalogInput(port);
+        	port += 2; //ports for each analog input increase by two each time
+        }
     }
 
     public void teleopInit() {

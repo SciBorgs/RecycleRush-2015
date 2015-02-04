@@ -37,6 +37,8 @@ public enum Hardware {
   
   public Gyro gyro;
   
+  public AnalogInput[] analogInput = new AnalogInput[6];
+  
   Hardware(){
     //drive chassis hardware
     frontLeftTalon = new CANTalon(1); //device CAN pcm ID numbers subject to change

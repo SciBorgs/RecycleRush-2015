@@ -24,7 +24,7 @@ public class Dashboard extends Command {
     accel = new BuiltInAccelerometer();
     ITable t;
     ITableListener l;
-    t.addSubTableListener(l);
+    //t.addSubTableListener(l);
     //SendableChooser.initTable(t);
   }
 

@@ -19,11 +19,10 @@ public enum Hardware {
   public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
   
   //claw
-  public CANTalon leftArmTalon;
-  public CANTalon rightArmTalon;
   public Encoder armEncoder;
-  public DoubleSolenoid clawSol;
-  
+  public Solenoid clawSol;
+  public CANTalon elevatorMainTalon, elevatorAssistTalon;
+
   //miscellaneous
   public Compressor compressor;
   
@@ -47,11 +46,12 @@ public enum Hardware {
     backRightTalon = new CANTalon(4); 
     
     //claw hardware
-    leftArmTalon = new CANTalon(5); 
-    rightArmTalon = new CANTalon(6);
     armEncoder = new Encoder(1, 2); //channels subject to change to accomodate CAN
-    clawSol = new DoubleSolenoid(1, 2); //channels subject to change to accomodate CAN
+    clawSol = new Solenoid(1); //channels subject to change to accomodate CAN
     
+	elevatorMainTalon = new CANTalon(5);
+	elevatorAssistTalon = new CANTalon(6);
+	
     leftJoy = new Joystick(1);
     rightJoy = new Joystick(2);
     

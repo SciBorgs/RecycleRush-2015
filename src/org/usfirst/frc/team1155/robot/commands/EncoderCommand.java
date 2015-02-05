@@ -9,7 +9,9 @@ public class EncoderCommand extends Command{
 	
 	double TicksPerInch = 360/(/*wheelDiameter*/1 * Math.PI);//One inch in Ticks
 	
-	double LeftEncoderDistance, RightEncoderDistance, AvgDistance;//distance In inches
+	double LeftEncoderDistance, RightEncoderDistance;//distance In inches
+
+	double AvgDistance;
 	
 	@Override
 	protected void initialize(){
@@ -40,7 +42,7 @@ public class EncoderCommand extends Command{
 		return RightEncoderDistance;
 	}
 	
-	public double AvgDistanceTraveled(){
+	public double getAvgDistanceTraveled(){
 		return AvgDistance;
 	}
 

@@ -23,7 +23,7 @@ public class OpenClaw extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return clawSolenoid.get();
+		return !clawSolenoid.get();
 	}
 
 	@Override

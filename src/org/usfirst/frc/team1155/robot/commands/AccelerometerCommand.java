@@ -72,6 +72,10 @@ public class AccelerometerCommand extends Command{
 		speed = distance/changeInTime;
 	}
 	
+	public void resetDistance() {
+		totalDistance = 0;
+	}
+	
 	public double returnDistance() {
 		return distance;
 	}

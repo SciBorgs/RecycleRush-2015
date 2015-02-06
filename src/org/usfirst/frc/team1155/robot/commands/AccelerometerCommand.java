@@ -45,14 +45,16 @@ public class AccelerometerCommand extends Command{
 		}
 		return initAngle;
 	}
-	//Updates 'currentAngle'until the robot moves straight or stops then returns the value
+	
+	/*Updates 'currentAngle'until the robot moves straight or stops then returns the value
 	public double getCurrAngle(){
 		while(accel.getX() == 0){
 			currentAngle = Robot.hardware.gyro.getAngle();
 			//new rotated angle = getAngle - current angle
 		}
 		return currentAngle;
-	}
+	}*/
+	
 	@Override
 	protected void execute() {
 		oldTime = currentTime;
@@ -72,7 +74,7 @@ public class AccelerometerCommand extends Command{
 		speed = distance/changeInTime;
 	}
 	
-	public void resetDistance() {
+	public void resetTotalDistance() {
 		totalDistance = 0;
 	}
 	

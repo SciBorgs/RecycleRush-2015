@@ -12,9 +12,8 @@ public class OI {
 	
 	public OI(){
 		//parameters passed into FastTurnCommand are used to pick the direction within the command
-		Robot.hardware.leftFastTurn.whenPressed(new FastTurnCommand(true));
-		Robot.hardware.rightFastTurn.whenPressed(new FastTurnCommand(false));
-		
+		Hardware.INSTANCE.leftFastTurn.whenPressed(new FastTurnCommand(0));
+		Hardware.INSTANCE.rightFastTurn.whenPressed(new FastTurnCommand(1));
 	}
 	
 	//// CREATING BUTTONS
@@ -30,7 +29,8 @@ public class OI {
     
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
+    // three ways: 
+	
     
     // Start the command when the button is pressed and let it run the command
     // until it is finished as determined by it's isFinished method.

@@ -1,8 +1,4 @@
-/*package org.usfirst.frc.team1155.robot.commands;
-
-
-//Commented out because of errors
-
+package org.usfirst.frc.team1155.robot.commands;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -62,4 +58,3 @@ public class UltrasonicSensor extends Command{
 	}
 
 }
-*/

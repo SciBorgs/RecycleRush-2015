@@ -1,19 +1,21 @@
 package org.usfirst.frc.team1155.robot.commands;
+
+
+
+import org.usfirst.frc.team1155.robot.*;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1155.robot.Robot;
-
 public class UltrasonicSensor extends Command{
 
-	private Ultrasonic rightUltrasonic, frontUltrasonic;
+	private Ultrasonic rightUltrasonic, leftUltrasonic, frontUltrasonic;
 	
-	public double leftDist = 0, rightDist = 0, frontDist = 0;
+	private double leftDist = 0, rightDist = 0, frontDist = 0;
 	
 	public UltrasonicSensor() {
-		rightUltrasonic = Robot.hardware.rightUltrasonic;
-		//rightUltrasonic = Hardware.INSTANCE.rightUltrasonic;
-		//frontUltrasonic = Hardware.INSTANCE.frontUltrasonic;
+		rightUltrasonic = Hardware.INSTANCE.leftUltrasonic;
+		leftUltrasonic = Hardware.INSTANCE.leftUltrasonic;
+		frontUltrasonic = Hardware.INSTANCE.frontUltrasonic;
 	}
 	
 	@Override
@@ -50,6 +52,20 @@ public class UltrasonicSensor extends Command{
 		rightUltrasonic.free();
 		frontUltrasonic.free();
 	}
+	
+	
+	public double getLeftDist() {
+		return leftDist;
+	}
+	
+	public double getRightDist() {
+		return leftDist;
+	}
+
+	public double getFrontDist() {
+		return leftDist;
+	}
+
 
 	@Override
 	protected void interrupted() {

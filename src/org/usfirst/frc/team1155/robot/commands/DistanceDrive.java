@@ -15,7 +15,7 @@ public class DistanceDrive extends Command{
 	private boolean isFinished;
 
 	//Distance must be in METERS
-	public DistanceDrive(double driveDistance, int driveDirection) {
+	public DistanceDrive(int driveDirection, double driveDistance) {
 		frontLeftTalon = Hardware.INSTANCE.frontLeftTalon;
 		frontRightTalon = Hardware.INSTANCE.frontRightTalon;
 		backLeftTalon = Hardware.INSTANCE.backLeftTalon;
@@ -52,7 +52,8 @@ public class DistanceDrive extends Command{
 				backRightTalon.set(-1);
 			}
 		}
-		isFinished = true;	}
+		isFinished = true;	
+	}
 
 	@Override
 	protected boolean isFinished() {

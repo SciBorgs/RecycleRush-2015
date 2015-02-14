@@ -11,7 +11,7 @@ public class FastTurnCommand extends Command {
 
 	private boolean isDone;
 	// Not sure why we need these constants??
-	private static final double ANGLE = 45;
+	private double angle;
 	private static final double BUFFER = 5;
 	private static final double MIN_SPEED = 0.5, MAX_SPEED = 1;
 
@@ -23,7 +23,8 @@ public class FastTurnCommand extends Command {
 	boolean right;
 
 	// 0 for left, 1 for right
-	public FastTurnCommand(int direction) {
+	public FastTurnCommand(int direction, double angle) {
+		this.angle = angle;
 		if (direction == 0) {
 			left = true;
 		} else if (direction == 1) {
@@ -35,7 +36,7 @@ public class FastTurnCommand extends Command {
 	@Override
 	protected void initialize() {
 		Robot.hardware.gyro.initGyro();
-		setAngles();
+		setAngle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -51,7 +52,7 @@ public class FastTurnCommand extends Command {
 				Robot.hardware.backLeftTalon.set(-1);
 			}
 			// turns robot 45 degrees to the right when right is true
-			if (right && getAngle() < (startVal + ANGLE)) {
+			if (right && getAngle() < (startVal + angle)) {
 				Robot.hardware.frontRightTalon.set(-1);
 				Robot.hardware.backRightTalon.set(-1);
 				Robot.hardware.frontLeftTalon.set(1);
@@ -62,12 +63,11 @@ public class FastTurnCommand extends Command {
 		}
 
 	}
-
 	// sets angles to use in fast turn
 	// fixes bad numbers from gyro
-	public void setAngles(){
+	public void setAngle(){
 		startVal = (Robot.hardware.gyro.getAngle() >= 360) ? Robot.hardware.gyro.getAngle() % 360 : Robot.hardware.gyro.getAngle();
-		fixedVal = (startVal - ANGLE < 0) ? startVal - ANGLE + 360 : startVal- ANGLE;
+		fixedVal = (startVal - angle < 0) ? startVal - angle + 360 : startVal- angle;
 	}
 
 	public double getAngle() {

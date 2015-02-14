@@ -12,8 +12,8 @@ public class OI {
 	
 	public OI(){
 		//parameters passed into FastTurnCommand are used to pick the direction within the command
-		Hardware.INSTANCE.leftFastTurn.whenPressed(new FastTurnCommand(0));
-		Hardware.INSTANCE.rightFastTurn.whenPressed(new FastTurnCommand(1));
+		Hardware.INSTANCE.leftFastTurn.whenPressed(new FastTurnCommand(0, 45));
+		Hardware.INSTANCE.rightFastTurn.whenPressed(new FastTurnCommand(1, 45));
 	}
 	
 	//// CREATING BUTTONS

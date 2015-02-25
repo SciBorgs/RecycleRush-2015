@@ -8,31 +8,38 @@ public enum Hardware {
 	
 	public CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
 	public CANTalon elevatorMainTalon, elevatorAssistTalon;
-	public Encoder elevatorEncoder;
-	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
+	public Ultrasonic leftUltrasonic, rightUltrasonic;
 //	public CameraServer camera;
-	public Solenoid clawSolenoid;
-	public CameraServer camera;
-	public Gyro gyro;
-	public Joystick rightJoystick, leftJoystick;
+	public Compressor compressor;
+	public DoubleSolenoid clawSolenoid;
+	public Joystick rightJoystick, leftJoystick, gamePad;
+	public DigitalInput bottomLimitSwitch;
 	
 	Hardware() {
 		//drive
 		frontLeftTalon = new CANTalon(1); //change device numbers to accommodate CAN electronics network
 		backLeftTalon = new CANTalon(2);
-		frontRightTalon = new CANTalon(3);
-		backRightTalon = new CANTalon(4);
+		frontRightTalon = new CANTalon(4);
+		backRightTalon = new CANTalon(3);
 		
 		//winch
 		elevatorMainTalon = new CANTalon(5);
 		elevatorAssistTalon = new CANTalon(6);
-		elevatorEncoder = new Encoder(0,1); //change channels later
 		
 		//leftUltrasonic = new Ultrasonic()
+		leftJoystick = new Joystick(0);
+		rightJoystick = new Joystick(1);
+		gamePad = new Joystick(2);
 		
 		//claw
-		clawSolenoid = new Solenoid(0, 1); //change channel to accommodate Pneumatics Control Module
+		compressor = new Compressor();
+		clawSolenoid = new DoubleSolenoid(0, 1); //change channel to accommodate Pneumatics Control Module
 
+		bottomLimitSwitch = new DigitalInput(0);
+//		
+//		leftUltrasonic = new Ultrasonic(0, 0);
+//		rightUltrasonic = new Ultrasonic(0, 0);
+		
 	}
 		
 }

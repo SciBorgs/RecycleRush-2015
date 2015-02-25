@@ -13,7 +13,6 @@ public class UltrasonicSensor extends Command{
 	public UltrasonicSensor() {
 		leftUltrasonic = Hardware.INSTANCE.leftUltrasonic;
 		rightUltrasonic = Hardware.INSTANCE.rightUltrasonic;
-		frontUltrasonic = Hardware.INSTANCE.frontUltrasonic;
 	}
 	
 	@Override

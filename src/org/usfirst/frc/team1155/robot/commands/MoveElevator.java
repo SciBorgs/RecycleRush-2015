@@ -1,55 +1,74 @@
 package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Hardware;
+import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveElevator extends Command {
-
 	private final int MAX_ERROR = 10; //Need to determine if this should be inches or encoder ticks
+	private final double MAX_HEIGHT= 100 , MIN_HEIGHT = 100;
+	private final double POSITION_CHANGE = 50f;
 	private CANTalon mainTalon, assistTalon;
-	private float targetHeight;
+	private Joystick gamePad;
+	private double elevatorSpeed;
 	
-	public MoveElevator(Winch subsystem) {
-		requires(subsystem);
+	public MoveElevator() {
+		requires(Robot.winch);
 		//Copy over references to main and assist talons
 		mainTalon = Hardware.INSTANCE.elevatorMainTalon;
 		assistTalon = Hardware.INSTANCE.elevatorAssistTalon;
-		
-		//Set main CANTalon to position control (height from encoder)
-		mainTalon.changeControlMode(CANTalon.ControlMode.Position);
-		//Set feedback device to the Analog Encoder and set PID
-		mainTalon.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogEncoder);
-		mainTalon.setPID(0, 0, 0.5);
-		//Set assist CANTalon to Follower mode and have it follow (mimic) the mainTalon
-		assistTalon.changeControlMode(CANTalon.ControlMode.Follower);
-		assistTalon.set(mainTalon.getDeviceID());
+		gamePad = Hardware.INSTANCE.gamePad;
 	}
+	
 	
 	@Override
 	protected void initialize() {
-		mainTalon.enableControl();
-		assistTalon.enableControl();
+		//Set the mode of the winch
+		Robot.winch.setPositionMode(true);
+		Robot.winch.setPIDMode(false);
 	}
 
 	@Override
 	protected void execute() {
-		
+		double newPosition = Robot.winch.getPosition();
+		switch(gamePad.getPOV()) {
+		case 315: case 0: case 45:
+			//Robot.winch.setSpeed(SPEED);
+			newPosition += POSITION_CHANGE;
+			
+			break;
+		case 135: case 180: case 225:
+			//Robot.winch.setSpeed(-SPEED);
+			newPosition -= POSITION_CHANGE;
+			
+			break;
+		default:
+			//Robot.winch.setSpeed(0);
+			break;
+		}
+		Robot.winch.setPosition(newPosition);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		//Returns whether the elevator is within a certain distance to the target height
-		return Math.abs(mainTalon.getPosition() - targetHeight) < MAX_ERROR;
+		if (!mainTalon.isControlEnabled() || !assistTalon.isControlEnabled())
+			return true;
+		else
+			return false;
 	}
 
 	@Override
 	protected void end() {
 		mainTalon.disableControl();
 		assistTalon.disableControl();
+		mainTalon.set(0);
+		assistTalon.set(0);
 	}
 
 	@Override
@@ -58,10 +77,10 @@ public class MoveElevator extends Command {
 		assistTalon.disableControl();
 	}
 	
-	protected void setHeight(float height) {
+	/*(protected void setHeight(float height) {
 		targetHeight = height;
 		//HEIGHT NEEDS TO BE CONVERTED FROM THIS TO ENCODER DISTANCE/REVOLUTIONS
 		mainTalon.setPosition(targetHeight);
-	}
+	}*/
 
 }

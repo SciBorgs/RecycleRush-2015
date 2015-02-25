@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Claw extends Subsystem {
 	
-	private Solenoid claw;
 	
 	public Claw() {
-		claw = Hardware.INSTANCE.clawSolenoid;
+
 	}
 	
 	public void close() {

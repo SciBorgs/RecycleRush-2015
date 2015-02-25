@@ -11,7 +11,6 @@ public class Sensors extends Subsystem{
 	public Sensors() {
 		leftUltrasonic = Hardware.INSTANCE.leftUltrasonic;
 		rightUltrasonic = Hardware.INSTANCE.rightUltrasonic;
-		frontUltrasonic = Hardware.INSTANCE.frontUltrasonic;
 	}
 	
 	

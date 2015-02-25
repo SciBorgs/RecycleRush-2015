@@ -27,7 +27,7 @@ public class OI extends Command {
 	private Command joystickDrive, moveElevator, calibrator;
 	
 	public OI() {
-		leftJoy = Hardware.INSTANCE.leftJoystick;
+	    leftJoy = Hardware.INSTANCE.leftJoystick;
 	    rightJoy = Hardware.INSTANCE.rightJoystick;
 	    gamePad = Hardware.INSTANCE.gamePad;
 	    // Button button = new JoystickButton(stick, buttonNumber);

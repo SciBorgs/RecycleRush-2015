@@ -43,7 +43,6 @@ public class JoystickDrive extends Command{
 		frontRightTalon.set(0);
 		backLeftTalon.set(0);
 		backRightTalon.set(0);
-		backRightTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 	}
 
 	@Override

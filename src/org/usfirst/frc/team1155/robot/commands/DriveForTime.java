@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Hardware;
+import org.usfirst.frc.team1155.robot.Robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,12 +14,12 @@ public class DriveForTime extends Command {
 	private long duration, startTime;
 	private int curMode;
 	private CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
-	private final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2;
+	public static final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2;
 	private final double SPEED = 0.6;
 	
     public DriveForTime(int duration, int mode) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	requires(Robot.drive);
+    	
     	frontLeftTalon = Hardware.INSTANCE.frontLeftTalon;
 		frontRightTalon = Hardware.INSTANCE.frontRightTalon;
 		backLeftTalon = Hardware.INSTANCE.backLeftTalon;
@@ -26,6 +27,8 @@ public class DriveForTime extends Command {
 		
     	curMode = mode;
     	this.duration = (long) duration * (long) Math.pow(10, 9);
+    	
+    	Robot.drive.setMode(false);
     }
 
     // Called just before this Command runs the first time
@@ -37,22 +40,13 @@ public class DriveForTime extends Command {
     protected void execute() {
     	switch(curMode) {
     	case DRIVE:
-    		frontLeftTalon.set(-SPEED);
-			backLeftTalon.set(-SPEED);
-			frontRightTalon.set(SPEED);
-			backRightTalon.set(SPEED);
+    		Robot.drive.set(-SPEED, SPEED);
     		break;
     	case TURN_LEFT:
-    		frontLeftTalon.set(SPEED);
-			backLeftTalon.set(SPEED);
-			frontRightTalon.set(SPEED);
-			backRightTalon.set(SPEED);
+    		Robot.drive.set(SPEED, SPEED);
     		break;
     	case TURN_RIGHT:
-    		frontLeftTalon.set(-SPEED);
-			backLeftTalon.set(-SPEED);
-			frontRightTalon.set(-SPEED);
-			backRightTalon.set(-SPEED);
+    		Robot.drive.set(-SPEED, -SPEED);
     		break;
     	}
     }
@@ -64,10 +58,12 @@ public class DriveForTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drive.set(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drive.set(0, 0);
     }
 }

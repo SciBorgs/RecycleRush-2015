@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1155.robot.commands.JoystickDrive;
 import org.usfirst.frc.team1155.robot.commands.MoveElevator;
 import org.usfirst.frc.team1155.robot.subsystems.Autonomous;
-import org.usfirst.frc.team1155.robot.subsystems.Claw;
 import org.usfirst.frc.team1155.robot.subsystems.Drive;
 import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
@@ -25,13 +24,11 @@ import org.usfirst.frc.team1155.robot.subsystems.Winch;
 public class Robot extends IterativeRobot {
 	public static Drive drive;
     public static Winch winch;
-    public static Claw claw;
     public static Command oi;
 	
     public void robotInit() {
 		winch = new Winch();
 		drive = new Drive();
-		claw = new Claw();
 		oi = new OI();
 		
 		Autonomous auto = new Autonomous(getRoutineValue());

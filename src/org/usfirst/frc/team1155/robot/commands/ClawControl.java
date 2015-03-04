@@ -3,24 +3,24 @@ package org.usfirst.frc.team1155.robot.commands;
 import org.usfirst.frc.team1155.robot.Hardware;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ToggleClaw extends Command {
+public class ClawControl extends Command {
 
+	public static final int OPEN = 0, CLOSE = 1;
 	private DoubleSolenoid clawSolenoid;
 	private DoubleSolenoid.Value positionGoal;
 	
-    public ToggleClaw() {
+    public ClawControl(int value) {
     	clawSolenoid = Hardware.INSTANCE.clawSolenoid;
+    	this.positionGoal = (value == OPEN) ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	positionGoal = (clawSolenoid.get() == DoubleSolenoid.Value.kForward) ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward;
     }
 
     // Called repeatedly when this Command is scheduled to run

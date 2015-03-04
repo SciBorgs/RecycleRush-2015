@@ -8,7 +8,7 @@ public enum Hardware {
 	
 	public CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
 	public CANTalon elevatorMainTalon, elevatorAssistTalon;
-	public Ultrasonic leftUltrasonic, rightUltrasonic;
+	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
 //	public CameraServer camera;
 	public Compressor compressor;
 	public DoubleSolenoid clawSolenoid;
@@ -39,6 +39,7 @@ public enum Hardware {
 //		
 //		leftUltrasonic = new Ultrasonic(0, 0);
 //		rightUltrasonic = new Ultrasonic(0, 0);
+//		frontUltrasonic = new Ultrasonic(0, 0);
 		
 	}
 		

@@ -3,15 +3,15 @@ package org.usfirst.frc.team1155.robot.commands;
 import org.usfirst.frc.team1155.robot.Hardware;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class AutonomousDrive extends Command {
-	private final double SPACE_BETWEEN = 6, CENTER_DISTANCE = 0;
+	private final double SPACE_BETWEEN = 6;
 	private CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
 	private Ultrasonic leftUltrasonic, rightUltrasonic; 
 	private double horizontal, distance, angle, left, right, encRight, encLeft;
@@ -120,7 +120,6 @@ public class AutonomousDrive extends Command {
     }
     
     private void move(double d) {
-    	double encTot = d; //Convert d to encoder position
     	
     	frontRightTalon.changeControlMode(ControlMode.Position);
     	frontLeftTalon.changeControlMode(ControlMode.Position);

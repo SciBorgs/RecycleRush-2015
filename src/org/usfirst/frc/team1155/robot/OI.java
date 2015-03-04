@@ -1,20 +1,17 @@
 package org.usfirst.frc.team1155.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team1155.robot.commands.CalibrateWinch;
+import org.usfirst.frc.team1155.robot.commands.ClawControl;
 import org.usfirst.frc.team1155.robot.commands.JoystickDrive;
 import org.usfirst.frc.team1155.robot.commands.MoveElevator;
 import org.usfirst.frc.team1155.robot.commands.PositionElevator;
-import org.usfirst.frc.team1155.robot.commands.ToggleClaw;
 import org.usfirst.frc.team1155.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team1155.robot.subsystems.Winch;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,20 +19,19 @@ import org.usfirst.frc.team1155.robot.subsystems.Winch;
  */
 public class OI extends Command {
 	
-	private Joystick leftJoy, rightJoy, gamePad;
-	private Button btnWinchPos1, btnWinchPos2, btnWinchPos3, btnWinchPos4, btnToggleClaw, btnToggleCompressor;
+	private Joystick gamePad;
+	private Button btnWinchPos1, btnWinchPos2, btnWinchPos3, btnWinchPos4, btnOpenClaw, btnCloseClaw, btnToggleCompressor;
 	private Command joystickDrive, moveElevator, calibrator;
 	
 	public OI() {
-	    leftJoy = Hardware.INSTANCE.leftJoystick;
-	    rightJoy = Hardware.INSTANCE.rightJoystick;
 	    gamePad = Hardware.INSTANCE.gamePad;
 	    // Button button = new JoystickButton(stick, buttonNumber);
 	    btnWinchPos1 = new JoystickButton(gamePad, 1);
 	    btnWinchPos2 = new JoystickButton(gamePad, 2);
 	    btnWinchPos3 = new JoystickButton(gamePad, 3);
 	    btnWinchPos4 = new JoystickButton(gamePad, 4);
-	    btnToggleClaw = new JoystickButton(gamePad, 6);
+	    btnOpenClaw = new JoystickButton(gamePad, 5);
+	    btnCloseClaw = new JoystickButton(gamePad, 6);
 	    btnToggleCompressor = new JoystickButton(gamePad, 5);
 	    
 	    joystickDrive = new JoystickDrive();
@@ -55,7 +51,8 @@ public class OI extends Command {
 	    btnWinchPos2.whenPressed(new PositionElevator(Winch.TOTE_2));
 	    btnWinchPos3.whenPressed(new PositionElevator(Winch.TOTE_3));
 	    btnWinchPos4.whenPressed(new PositionElevator(Winch.TOTE_4));
-		btnToggleClaw.whenPressed(new ToggleClaw());
+		btnOpenClaw.whenPressed(new ClawControl(ClawControl.OPEN));
+		btnCloseClaw.whenPressed(new ClawControl(ClawControl.CLOSE));
 		btnToggleCompressor.whenPressed(new ToggleCompressor());
 	}
 	

@@ -1,17 +1,16 @@
 
 package org.usfirst.frc.team1155.robot;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team1155.robot.commands.JoystickDrive;
-import org.usfirst.frc.team1155.robot.commands.MoveElevator;
+import org.usfirst.frc.team1155.robot.commands.AutonomousGroup;
 import org.usfirst.frc.team1155.robot.subsystems.Autonomous;
 import org.usfirst.frc.team1155.robot.subsystems.Drive;
 import org.usfirst.frc.team1155.robot.subsystems.Winch;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,17 +24,13 @@ public class Robot extends IterativeRobot {
 	public static Drive drive;
     public static Winch winch;
     public static Command oi;
+    public static CommandGroup autonomous;
 	
     public void robotInit() {
 		winch = new Winch();
 		drive = new Drive();
 		oi = new OI();
-		
-		Autonomous auto = new Autonomous(getRoutineValue());
-	}
-	
-	private int getRoutineValue() {
-		return 2;
+		autonomous = new AutonomousGroup();
 	}
 	
 	public void disabledInit() {}
@@ -43,7 +38,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {}
 	
 	public void autonomousInit() {
-		
+		autonomous.start();
 	}
 	
 	public void autonomousPeriodic() {}

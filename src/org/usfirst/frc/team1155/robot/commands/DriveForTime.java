@@ -1,9 +1,7 @@
 package org.usfirst.frc.team1155.robot.commands;
 
-import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,17 +11,11 @@ public class DriveForTime extends Command {
 
 	private long duration, startTime;
 	private int curMode;
-	private CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
 	public static final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2;
 	private final double SPEED = 0.6;
 	
     public DriveForTime(int duration, int mode) {
     	requires(Robot.drive);
-    	
-    	frontLeftTalon = Hardware.INSTANCE.frontLeftTalon;
-		frontRightTalon = Hardware.INSTANCE.frontRightTalon;
-		backLeftTalon = Hardware.INSTANCE.backLeftTalon;
-		backRightTalon = Hardware.INSTANCE.backRightTalon;
 		
     	curMode = mode;
     	this.duration = (long) duration * (long) Math.pow(10, 9);
@@ -40,13 +32,13 @@ public class DriveForTime extends Command {
     protected void execute() {
     	switch(curMode) {
     	case DRIVE:
-    		Robot.drive.set(-SPEED, SPEED);
-    		break;
-    	case TURN_LEFT:
     		Robot.drive.set(SPEED, SPEED);
     		break;
+    	case TURN_LEFT:
+    		Robot.drive.set(-SPEED, SPEED);
+    		break;
     	case TURN_RIGHT:
-    		Robot.drive.set(-SPEED, -SPEED);
+    		Robot.drive.set(SPEED, -SPEED);
     		break;
     	}
     }

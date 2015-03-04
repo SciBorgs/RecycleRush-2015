@@ -1,25 +1,17 @@
 package org.usfirst.frc.team1155.robot.commands;
 
-import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
-import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PositionElevator extends Command {
-	private final int MAX_ERROR = 10; //Need to determine if this should be inches or encoder ticks
-	private final float MAX_HEIGHT= 100 , MIN_HEIGHT = 100;
 	private double targetHeight;
-	private CANTalon mainTalon, assistTalon;
+	private CANTalon mainTalon;
 	
 	public PositionElevator(double height) {
 		requires(Robot.winch);
-		targetHeight = height;
-		//Copy over references to main and assist talons
-		mainTalon = Hardware.INSTANCE.elevatorMainTalon;
-		assistTalon = Hardware.INSTANCE.elevatorAssistTalon;
-		
+		targetHeight = height;		
 	}
 
 	@Override

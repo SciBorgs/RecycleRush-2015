@@ -2,9 +2,7 @@ package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
-import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;

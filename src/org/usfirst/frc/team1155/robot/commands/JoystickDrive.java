@@ -6,9 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class JoystickDrive extends Command{
 	private CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
@@ -17,8 +15,7 @@ public class JoystickDrive extends Command{
 	
 	private double leftVal, rightVal;
 	private final float maxChange = 0.4f;
-	
-	private double frontLeftSpeed, frontRightSpeed, backLeftSpeed, backRightSpeed;
+
 	public JoystickDrive(){
 		frontLeftTalon = Hardware.INSTANCE.frontLeftTalon;
 		frontRightTalon = Hardware.INSTANCE.frontRightTalon;
@@ -36,8 +33,6 @@ public class JoystickDrive extends Command{
 
 	@Override
 	protected void initialize() {
-		SmartDashboard dash = new SmartDashboard();
-		dash.putString("String 1", "Joystick Drive Initialized");
 		// TODO Auto-generated method stub
 		frontLeftTalon.set(0);
 		frontRightTalon.set(0);
@@ -47,8 +42,6 @@ public class JoystickDrive extends Command{
 
 	@Override
 	protected void execute() {
-		SmartDashboard dash = new SmartDashboard();
-		dash.putString("String 1", "Joystick Drive Running");
 		rightVal = changeTo(rightVal, rightJoystick.getY());
 		leftVal = changeTo(leftVal, leftJoystick.getY());
 		if(rightTrigger.get() || leftTrigger.get()) {

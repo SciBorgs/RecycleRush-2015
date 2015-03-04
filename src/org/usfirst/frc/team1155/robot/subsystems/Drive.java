@@ -18,7 +18,7 @@ public class Drive extends Subsystem {
 	}
 	
 	public void set(double leftVal, double rightVal) {
-		frontLeftTalon.set(leftVal);
+		frontLeftTalon.set(-leftVal);
 		frontRightTalon.set(rightVal);
 	}
 	

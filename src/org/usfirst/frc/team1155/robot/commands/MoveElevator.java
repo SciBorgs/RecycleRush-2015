@@ -2,21 +2,15 @@ package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
-import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveElevator extends Command {
-	private final int MAX_ERROR = 10; //Need to determine if this should be inches or encoder ticks
-	private final double MAX_HEIGHT= 100 , MIN_HEIGHT = 100;
 	private final double POSITION_CHANGE = 50f;
 	private CANTalon mainTalon, assistTalon;
 	private Joystick gamePad;
-	private double elevatorSpeed;
 	
 	public MoveElevator() {
 		requires(Robot.winch);

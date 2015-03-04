@@ -40,7 +40,6 @@ public class AutonomousDrive extends Command {
 		backLeftTalon.changeControlMode(ControlMode.Follower);
 		
 		leftUltrasonic.setEnabled(true);
-    	rightUltrasonic.setEnabled(true);
     	
     	leftUltrasonic.ping();
     	rightUltrasonic.ping();
@@ -78,16 +77,8 @@ public class AutonomousDrive extends Command {
     }
     
     private double getDistance() {
-    	double diff, theta, hypotenuse;
-    	left = leftUltrasonic.getRangeInches();
-    	right = rightUltrasonic.getRangeInches();
-    	diff = Math.abs(left - right);
-    	theta = Math.atan(diff/SPACE_BETWEEN);
-    	horizontal = Math.tan(theta) * left;
-    	hypotenuse = horizontal/Math.sin(theta);
-    	angle = 90 - theta;
-    	turnRight = left < right;
-    	return hypotenuse;
+    	distance = leftUltrasonic.getRangeInches();
+    	return distance;
     }
     
     private void turn(double a) {

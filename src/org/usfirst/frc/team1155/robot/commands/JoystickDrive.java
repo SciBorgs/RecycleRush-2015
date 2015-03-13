@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Hardware;
+import org.usfirst.frc.team1155.robot.Robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
@@ -34,6 +35,7 @@ public class JoystickDrive extends Command{
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
+		Robot.drive.setMode(false);
 		frontLeftTalon.set(0);
 		frontRightTalon.set(0);
 		backLeftTalon.set(0);
@@ -52,15 +54,9 @@ public class JoystickDrive extends Command{
 			rightVal *= 0.5;
 		}
 		if (rightVal == 0 && leftVal == 0) {
-			frontLeftTalon.set(0);
-			frontRightTalon.set(0);
-			backLeftTalon.set(0);
-			backRightTalon.set(0);
+			Robot.drive.set(0, 0);
 		} else {
-			frontLeftTalon.set(-leftVal);
-			backLeftTalon.set(-leftVal);
-			frontRightTalon.set(rightVal);
-			backRightTalon.set(rightVal);
+			Robot.drive.set(-leftVal, -rightVal);
 		}
 		
 	}

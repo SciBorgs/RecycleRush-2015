@@ -12,7 +12,7 @@ public class DriveForTime extends Command {
 	private long duration, startTime;
 	private int curMode;
 	public static final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2;
-	private final double SPEED = 0.6;
+	private final double SPEED = 0.3;
 	
     public DriveForTime(int duration, int mode) {
     	requires(Robot.drive);

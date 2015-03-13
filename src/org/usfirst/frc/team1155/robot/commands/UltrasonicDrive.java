@@ -3,19 +3,20 @@ package org.usfirst.frc.team1155.robot.commands;
 import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class UltrasonicDrive extends Command {
 
-	private Ultrasonic ultrasonic;
-	private double distance;
-	private final double SPEED = 0.4, BUFFER = 20;
-	
+	private AnalogInput ultrasonic;
+	private double distance, currentDistance;
+	private final double SPEED = 0.4, BUFFER = 2;
+
 	public UltrasonicDrive(double distance) {
 		this.distance = distance;
 		
-		ultrasonic = Hardware.INSTANCE.frontUltrasonic;
+	
 	}
 	
 	@Override
@@ -25,17 +26,18 @@ public class UltrasonicDrive extends Command {
 
 	@Override
 	protected void execute() {
-		if(ultrasonic.getRangeInches() > distance) {
+		currentDistance = ultrasonic.getValue();
+		if(currentDistance > distance) {
 			Robot.drive.set(SPEED, SPEED);
 		}
-		else if(ultrasonic.getRangeInches() < distance) {
+		else if(currentDistance < distance) {
 			Robot.drive.set(-SPEED, -SPEED);
 		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(distance - ultrasonic.getRangeInches()) < BUFFER;
+		return Math.abs(distance - ultrasonic.getValue()) < BUFFER;
 	}
 
 	@Override

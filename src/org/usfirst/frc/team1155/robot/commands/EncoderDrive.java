@@ -21,7 +21,6 @@ public class EncoderDrive extends Command {
 	protected void initialize() {
 		Robot.drive.setMode(true);
 		Robot.drive.setLeftPosition(0);
-		Robot.drive.setRightPosition(0);
 	}
 
 	@Override
@@ -42,8 +41,7 @@ public class EncoderDrive extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(Robot.drive.getLeftPosition() - distance) < BUFFER || 
-			   Math.abs(Robot.drive.getRightPosition() - distance) < BUFFER;
+		return Math.abs(Robot.drive.getLeftPosition() - distance) < BUFFER;
 	}
 
 	@Override

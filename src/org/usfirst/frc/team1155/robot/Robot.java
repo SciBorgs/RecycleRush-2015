@@ -6,11 +6,21 @@ import org.usfirst.frc.team1155.robot.subsystems.Autonomous;
 import org.usfirst.frc.team1155.robot.subsystems.Drive;
 import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.DrawMode;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.ShapeMode;
+
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,12 +35,21 @@ public class Robot extends IterativeRobot {
     public static Winch winch;
     public static Command oi;
     public static CommandGroup autonomous;
+    
+    int session;
+    Image frame;
+    AxisCamera camera;
+    String ip = "insertIPhere";
+    DigitalInput ultrasonicIn = Hardware.INSTANCE.ultrasonicIn;
+    DigitalOutput ultrasonicOut = Hardware.INSTANCE.ultrasonicOut;
 	
     public void robotInit() {
 		winch = new Winch();
 		drive = new Drive();
 		oi = new OI();
-		autonomous = new AutonomousGroup();
+		autonomous = new AutonomousGroup(0);
+//		camera = new AxisCamera(ip);
+//		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 	}
 	
 	public void disabledInit() {}
@@ -41,7 +60,9 @@ public class Robot extends IterativeRobot {
 		autonomous.start();
 	}
 	
-	public void autonomousPeriodic() {}
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
 	
 	public void teleopInit() {
 		SmartDashboard dash = new SmartDashboard();
@@ -51,7 +72,25 @@ public class Robot extends IterativeRobot {
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		camera.getImage(frame);
+        CameraServer.getInstance().setImage(frame);
 	}
 	
-	public void testPeriodic() {}
+	public void testPeriodic() {
+		ultrasonicOut.set(false);
+		Timer.delay(0.002);
+		ultrasonicOut.set(true);
+		Timer.delay(0.005);
+		ultrasonicOut.set(false);
+		
+		while(!ultrasonicIn.get()){
+		}
+		long startTime = System.nanoTime();
+		while(ultrasonicIn.get()) {
+		}
+		long endTime = System.nanoTime();
+
+		long duration = (endTime - startTime);
+		
+	}
 }

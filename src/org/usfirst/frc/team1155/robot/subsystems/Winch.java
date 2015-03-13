@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Winch extends Subsystem {
-	public static final double TOTE_1 = 0, TOTE_2 = 1500, TOTE_3 = 3000, TOTE_4 = 4500, BIN_HEIGHT = 101494; //where Winch should go before closing
+	public static final double TOTE_1 = 0, TOTE_2 = 1500, TOTE_3 = 3000, TOTE_4 = 4500, BIN_HEIGHT = 2000; //where Winch should go before closing
 	private CANTalon mainTalon, assistTalon;
 	
 	public Winch() {

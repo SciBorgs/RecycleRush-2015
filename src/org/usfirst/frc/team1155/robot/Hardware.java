@@ -8,12 +8,14 @@ public enum Hardware {
 	
 	public CANTalon frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon;
 	public CANTalon elevatorMainTalon, elevatorAssistTalon;
-	public Ultrasonic leftUltrasonic, rightUltrasonic, frontUltrasonic;
 //	public CameraServer camera;
 	public Compressor compressor;
 	public DoubleSolenoid clawSolenoid;
 	public Joystick rightJoystick, leftJoystick, gamePad;
 	public DigitalInput bottomLimitSwitch;
+	public AnalogInput autonomousSwitch;
+	public DigitalInput ultrasonicIn;
+	public DigitalOutput ultrasonicOut;
 	
 	Hardware() {
 		//drive
@@ -26,17 +28,18 @@ public enum Hardware {
 		elevatorMainTalon = new CANTalon(5);
 		elevatorAssistTalon = new CANTalon(6);
 		
-		//leftUltrasonic = new Ultrasonic()
+		ultrasonicIn = new DigitalInput(1);
+		ultrasonicOut = new DigitalOutput(1);
 		leftJoystick = new Joystick(0);
 		rightJoystick = new Joystick(1);
 		gamePad = new Joystick(2);
 		
 		//claw
-		compressor = new Compressor();
+		compressor = new Compressor(); 
 		clawSolenoid = new DoubleSolenoid(0, 1); //change channel to accommodate Pneumatics Control Module
 
 		bottomLimitSwitch = new DigitalInput(0);
-//		
+		autonomousSwitch = new AnalogInput(3);
 //		leftUltrasonic = new Ultrasonic(0, 0);
 //		rightUltrasonic = new Ultrasonic(0, 0);
 //		frontUltrasonic = new Ultrasonic(0, 0);

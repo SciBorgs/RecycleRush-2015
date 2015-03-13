@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -10,14 +11,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousGroup extends CommandGroup {
 	
 	private CommandGroup alignTote;
-	private final double DISTANCE_TO_AUTOZONE = 0, DISTANCE_FOR_TURN = 0, BACKUP_DISTANCE = 0, CLAW_CLEARANCE_DISTANCE = 0, TOTE_DISTANCE_BEFORE_GAP = 0, TOTE_DISTANCE_IN_GAP = 0;
+	private final double DISTANCE_TO_AUTOZONE = 6000, DISTANCE_FOR_TURN = 6000, BACKUP_DISTANCE = 6000, 
+			CLAW_CLEARANCE_DISTANCE = 6000, TOTE_DISTANCE_BEFORE_GAP = 10, TOTE_DISTANCE_IN_GAP = 5;
+	private final double voltageRange = 0;
 	
-    public AutonomousGroup() {
+    public AutonomousGroup(int mode) {
     	alignTote = new CommandGroup();
     	alignTote.addSequential(new ClawControl(ClawControl.CLOSE));
     	alignTote.addSequential(new ClawControl(ClawControl.OPEN));
     	
-    	switch(getRoutine()) {
+    	switch(mode) {
     	case 0:
     		driveToAutozone();
     		break;
@@ -40,11 +43,11 @@ public class AutonomousGroup extends CommandGroup {
     }
     
     public int getRoutine() {
-		return 0;
+		return (int) Math.floor(Hardware.INSTANCE.autonomousSwitch.getAverageVoltage() / voltageRange);
     }
     
     public void driveToAutozone() {
-    	addSequential(new EncoderDrive(DISTANCE_TO_AUTOZONE, EncoderDrive.DRIVE));  //Drive into the autozone
+    	addSequential(new DriveForTime(3, DriveForTime.DRIVE));  //Drive into the autozone
     }
     
     public void toteToAutozone() {

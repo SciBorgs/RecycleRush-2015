@@ -22,9 +22,6 @@ public class AutonomousDrive extends Command {
 		frontRightTalon = Hardware.INSTANCE.frontRightTalon;
 		backLeftTalon = Hardware.INSTANCE.backLeftTalon;
 		backRightTalon = Hardware.INSTANCE.backRightTalon;
-		
-		leftUltrasonic = Hardware.INSTANCE.leftUltrasonic;
-		rightUltrasonic = Hardware.INSTANCE.rightUltrasonic;
     }
 
     // Called just before this Command runs the first time

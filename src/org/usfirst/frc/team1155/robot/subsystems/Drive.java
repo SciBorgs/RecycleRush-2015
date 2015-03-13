@@ -18,8 +18,10 @@ public class Drive extends Subsystem {
 	}
 	
 	public void set(double leftVal, double rightVal) {
-		frontLeftTalon.set(-leftVal);
-		frontRightTalon.set(rightVal);
+		frontLeftTalon.set(leftVal);
+		frontRightTalon.set(-rightVal);
+		backLeftTalon.set(frontLeftTalon.getDeviceID());
+		backRightTalon.set(frontRightTalon.getDeviceID());
 	}
 	
 	public void setMode(boolean distanceMode) {

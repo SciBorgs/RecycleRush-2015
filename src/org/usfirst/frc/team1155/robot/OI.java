@@ -32,7 +32,7 @@ public class OI extends Command {
 	    btnWinchPos4 = new JoystickButton(gamePad, 4);
 	    btnOpenClaw = new JoystickButton(gamePad, 5);
 	    btnCloseClaw = new JoystickButton(gamePad, 6);
-	    btnToggleCompressor = new JoystickButton(gamePad, 5);
+	    btnToggleCompressor = new JoystickButton(gamePad, 8);
 	    
 	    joystickDrive = new JoystickDrive();
 	    moveElevator = new MoveElevator();
@@ -68,12 +68,16 @@ public class OI extends Command {
 	}
 	
 	protected void end() {
+		joystickDrive.cancel();
+		moveElevator.cancel();
+		calibrator.cancel();
 	}
 	
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
-		
+		joystickDrive.cancel();
+		moveElevator.cancel();
+		calibrator.cancel();		
 	}
 	
     //// CREATING BUTTONS

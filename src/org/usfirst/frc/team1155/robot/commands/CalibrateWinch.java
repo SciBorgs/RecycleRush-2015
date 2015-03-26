@@ -26,10 +26,8 @@ public class CalibrateWinch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(calibrationSwitch.get());
     	if(!calibrationSwitch.get() && Robot.winch.getPosition() < 10) {
     		Robot.winch.setPosition(0);
-    		System.out.println("Calibrated");
     	}
     }
 

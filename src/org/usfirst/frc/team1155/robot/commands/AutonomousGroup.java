@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousGroup extends CommandGroup {
 	
 	private CommandGroup alignTote;
-	private final double DISTANCE_TO_AUTOZONE = 6000, DISTANCE_FOR_TURN = 6000, BACKUP_DISTANCE = 6000, 
-			CLAW_CLEARANCE_DISTANCE = 6000, TOTE_DISTANCE_BEFORE_GAP = 10, TOTE_DISTANCE_IN_GAP = 5;
+	private final double DISTANCE_FOR_TURN = 1100, BACKUP_DISTANCE = 1200,
+			DISTANCE_TO_AUTOZONE = 6000; //Encoder ticks
+	private final double TIME_TO_AUTOZONE = 3;  //Seconds
+	private final double CLAW_CLEARANCE_DISTANCE = 12, TOTE_DISTANCE_BEFORE_GAP = 10, 
+			TOTE_DISTANCE_IN_GAP = 5; //Inches
 	private final double voltageRange = 0;
 	
     public AutonomousGroup(int mode) {
@@ -39,6 +42,9 @@ public class AutonomousGroup extends CommandGroup {
     	case 5:
     		binAndThreeTotesToAutozone();
     		break;
+    	case 6:
+    		testRoutine();
+    		break;
     	}
     }
     
@@ -46,16 +52,22 @@ public class AutonomousGroup extends CommandGroup {
 		return (int) Math.floor(Hardware.INSTANCE.autonomousSwitch.getAverageVoltage() / voltageRange);
     }
     
+    public void testRoutine() {
+    	addSequential(new EncoderDrive(DISTANCE_FOR_TURN, EncoderDrive.TURN_RIGHT));
+    }
+    
     public void driveToAutozone() {
-    	addSequential(new DriveForTime(3, DriveForTime.DRIVE));  //Drive into the autozone
+    	addSequential(new DriveForTime(TIME_TO_AUTOZONE, DriveForTime.DRIVE));  //Drive into the autozone
     }
     
     public void toteToAutozone() {
     	addSequential(new ClawControl(ClawControl.CLOSE));  //Close on tote
-    	addParallel(new PositionElevator(Winch.TOTE_2));  //Lift the tote
+    	addSequential(new Delay(1));
     	addSequential(new EncoderDrive(DISTANCE_FOR_TURN, EncoderDrive.TURN_RIGHT)); //Turn towards the autozone
-    	addSequential(new EncoderDrive(DISTANCE_TO_AUTOZONE, EncoderDrive.DRIVE));  //Drive into the autozone
-    	addParallel(new PositionElevator(Winch.TOTE_1)); //Lower the tote
+    	addParallel(new PositionElevator(Winch.TOTE_2));  //Lift the tote
+    	addSequential(new Delay(1));
+    	addSequential(new DriveForTime(TIME_TO_AUTOZONE, DriveForTime.DRIVE));  //Drive into the autozone
+    	addSequential(new PositionElevator(Winch.TOTE_1), 1); //Lower the tote
     	addSequential(new ClawControl(ClawControl.OPEN)); //Open the claw
     	addSequential(new EncoderDrive(BACKUP_DISTANCE, EncoderDrive.DRIVE)); //Back up slightly so we are not touching tote
     }

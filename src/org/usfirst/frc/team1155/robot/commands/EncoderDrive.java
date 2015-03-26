@@ -9,6 +9,7 @@ public class EncoderDrive extends Command {
 	private double distance;
 	private int curMode;
 	public static final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2, BUFFER = 0;
+	public static final float SPEED = 0.3f;
 	
 	public EncoderDrive(double tickDistance, int mode) {
 		requires(Robot.drive);
@@ -19,7 +20,7 @@ public class EncoderDrive extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.drive.setMode(true);
+		Robot.drive.setMode(false);
 		Robot.drive.setLeftPosition(0);
 	}
 
@@ -28,28 +29,32 @@ public class EncoderDrive extends Command {
 		//Needs to be calibrated based on encoder directions
 		switch(curMode) {
     	case DRIVE:
-    		Robot.drive.set(distance, distance);
+    		Robot.drive.set(SPEED, SPEED);
     		break;
     	case TURN_LEFT:
-    		Robot.drive.set(-distance, distance);
+    		Robot.drive.set(-SPEED, SPEED);
     		break;
     	case TURN_RIGHT:
-    		Robot.drive.set(distance, -distance);
+    		Robot.drive.set(SPEED, -SPEED);
     		break;
     	}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(Robot.drive.getLeftPosition() - distance) < BUFFER;
+		return Math.abs(Robot.drive.getLeftPosition()) - distance > 0;
 	}
 
 	@Override
 	protected void end() {
+		Robot.drive.setLeftPosition(0);
+		Robot.drive.set(0, 0);
 	}
 
 	@Override
 	protected void interrupted() {
+		Robot.drive.setLeftPosition(0);
+		Robot.drive.set(0, 0);
 	}
 
 }

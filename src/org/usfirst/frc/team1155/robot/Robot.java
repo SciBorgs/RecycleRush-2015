@@ -11,11 +11,13 @@ import com.ni.vision.NIVision.DrawMode;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.ShapeMode;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -35,21 +37,23 @@ public class Robot extends IterativeRobot {
     public static Winch winch;
     public static Command oi;
     public static CommandGroup autonomous;
+    public static SmartDashboard dash;
     
     int session;
     Image frame;
     AxisCamera camera;
-    String ip = "insertIPhere";
-    DigitalInput ultrasonicIn = Hardware.INSTANCE.ultrasonicIn;
-    DigitalOutput ultrasonicOut = Hardware.INSTANCE.ultrasonicOut;
+    CameraServer server;
+    String ip = "169.254.253.235";
+    Ultrasonic ultrasonic;
 	
     public void robotInit() {
+    	
 		winch = new Winch();
 		drive = new Drive();
 		oi = new OI();
-		autonomous = new AutonomousGroup(0);
-//		camera = new AxisCamera(ip);
-//		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+		autonomous = new AutonomousGroup(1);
+		
+	    dash = new SmartDashboard();
 	}
 	
 	public void disabledInit() {}
@@ -57,14 +61,18 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {}
 	
 	public void autonomousInit() {
+		if(oi.isRunning()) oi.cancel();
 		autonomous.start();
+		Hardware.INSTANCE.ultrasonic.setAutomaticMode(true);
 	}
 	
 	public void autonomousPeriodic() {
+		dash.putNumber("ENCODER", Robot.drive.getLeftPosition());
 		Scheduler.getInstance().run();
 	}
 	
 	public void teleopInit() {
+		if(autonomous.isRunning()) autonomous.cancel();
 		SmartDashboard dash = new SmartDashboard();
 		dash.putString("String 1", "Teleop Initiated");
 		oi.start();
@@ -72,25 +80,9 @@ public class Robot extends IterativeRobot {
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		camera.getImage(frame);
-        CameraServer.getInstance().setImage(frame);
 	}
 	
-	public void testPeriodic() {
-		ultrasonicOut.set(false);
-		Timer.delay(0.002);
-		ultrasonicOut.set(true);
-		Timer.delay(0.005);
-		ultrasonicOut.set(false);
-		
-		while(!ultrasonicIn.get()){
-		}
-		long startTime = System.nanoTime();
-		while(ultrasonicIn.get()) {
-		}
-		long endTime = System.nanoTime();
-
-		long duration = (endTime - startTime);
+	public void testPeriodic() {		
 		
 	}
 }

@@ -28,8 +28,8 @@ public class JoystickDrive extends Command{
 		
 		rightTrigger = new JoystickButton(rightJoystick, 1);
 		leftTrigger = new JoystickButton(leftJoystick, 1);
-		btnSlowLeft = new JoystickButton(leftJoystick, 10);
-		btnSlowRight = new JoystickButton(rightJoystick, 10);
+		btnSlowLeft = new JoystickButton(leftJoystick, 3);
+		btnSlowRight = new JoystickButton(rightJoystick, 3);
 	}
 
 	@Override
@@ -50,8 +50,12 @@ public class JoystickDrive extends Command{
 			leftVal = rightVal;
 		}
 		if(btnSlowLeft.get() || btnSlowRight.get()) {
-			leftVal *= 0.5;
-			rightVal *= 0.5;
+			leftVal *= 0.4;
+			rightVal *= 0.4;
+		}
+		else {
+			leftVal *= 0.7;
+			rightVal *= 0.7;
 		}
 		if (rightVal == 0 && leftVal == 0) {
 			Robot.drive.set(0, 0);
@@ -62,11 +66,7 @@ public class JoystickDrive extends Command{
 	}
 
 	private double changeTo(double curVal, double targetVal) {
-		if(Math.abs(curVal - targetVal) > maxChange) {
-			curVal += maxChange * targetVal / Math.abs(targetVal);
-		}
-		else curVal = targetVal;
-		return curVal * Math.abs(curVal);
+		return targetVal * Math.abs(targetVal);
 	}
 
 	@Override

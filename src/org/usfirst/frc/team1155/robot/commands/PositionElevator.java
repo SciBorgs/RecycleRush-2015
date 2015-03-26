@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -7,11 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class PositionElevator extends Command {
 	private double targetHeight;
-	private CANTalon mainTalon;
+	private CANTalon mainTalon, assistTalon;
 	
 	public PositionElevator(double height) {
 		requires(Robot.winch);
-		targetHeight = height;		
+		targetHeight = height;	
 	}
 
 	@Override
@@ -23,7 +24,7 @@ public class PositionElevator extends Command {
 	@Override
 	protected void execute() {
 		System.out.println("Going to" + targetHeight);
-		mainTalon.set(targetHeight);
+		Robot.winch.setPosition(targetHeight);
 	}
 
 	@Override

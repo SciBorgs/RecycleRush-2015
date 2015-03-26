@@ -16,6 +16,8 @@ public enum Hardware {
 	public AnalogInput autonomousSwitch;
 	public DigitalInput ultrasonicIn;
 	public DigitalOutput ultrasonicOut;
+	public Ultrasonic ultrasonic;
+	
 	
 	Hardware() {
 		//drive
@@ -27,9 +29,7 @@ public enum Hardware {
 		//winch
 		elevatorMainTalon = new CANTalon(5);
 		elevatorAssistTalon = new CANTalon(6);
-		
-		ultrasonicIn = new DigitalInput(1);
-		ultrasonicOut = new DigitalOutput(1);
+
 		leftJoystick = new Joystick(0);
 		rightJoystick = new Joystick(1);
 		gamePad = new Joystick(2);
@@ -40,9 +40,7 @@ public enum Hardware {
 
 		bottomLimitSwitch = new DigitalInput(0);
 		autonomousSwitch = new AnalogInput(3);
-//		leftUltrasonic = new Ultrasonic(0, 0);
-//		rightUltrasonic = new Ultrasonic(0, 0);
-//		frontUltrasonic = new Ultrasonic(0, 0);
+		ultrasonic = new Ultrasonic(4,3);
 		
 	}
 		

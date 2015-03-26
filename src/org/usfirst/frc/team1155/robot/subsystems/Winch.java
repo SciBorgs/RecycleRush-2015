@@ -51,6 +51,7 @@ public class Winch extends Subsystem {
 		if(position > 6200) mainTalon.set(6200);
 		else if(position < 0) mainTalon.set(0);
 		else mainTalon.set(position);
+		assistTalon.set(mainTalon.getDeviceID());
 	}
 	
 	public double getPosition() {

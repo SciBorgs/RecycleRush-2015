@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveElevator extends Command {
-	private final double POSITION_CHANGE = 50f;
+	private final double POSITION_CHANGE = 75f;
 	private CANTalon mainTalon, assistTalon;
 	private Joystick gamePad;
 	

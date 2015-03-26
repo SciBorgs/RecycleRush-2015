@@ -59,7 +59,7 @@ public class Drive extends Subsystem {
 	}
 	
 	public double getLeftPosition() {
-		return frontLeftTalon.getSetpoint();
+		return frontLeftTalon.getEncPosition();
 	}
 	
 	public double getRightPosition() {

@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 	public static Drive drive;
     public static Winch winch;
     public static Command oi;
-    public static CommandGroup autonomous;
+    public static AutonomousGroup autonomous;
     public static SmartDashboard dash;
     
     int session;
@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		winch = new Winch();
 		drive = new Drive();
 		oi = new OI();
-		autonomous = new AutonomousGroup(1);
+		autonomous = new AutonomousGroup(2);
 		
 	    dash = new SmartDashboard();
 	}
@@ -62,6 +62,7 @@ public class Robot extends IterativeRobot {
 	
 	public void autonomousInit() {
 		if(oi.isRunning()) oi.cancel();
+		autonomous = new AutonomousGroup(0);
 		autonomous.start();
 		Hardware.INSTANCE.ultrasonic.setAutomaticMode(true);
 	}
@@ -82,7 +83,11 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 	
+	public void testInit() {
+	}
+	
 	public void testPeriodic() {		
-		
+		System.out.println(autonomous.getRoutine());
+		new SmartDashboard().putNumber("Auto Routine: ", autonomous.getRoutine());
 	}
 }

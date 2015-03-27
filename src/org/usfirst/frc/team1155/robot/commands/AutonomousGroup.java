@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+
+
 import org.usfirst.frc.team1155.robot.Hardware;
+import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -11,11 +14,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousGroup extends CommandGroup {
 	
 	private CommandGroup alignTote;
-	private final double DISTANCE_FOR_TURN = 1100, BACKUP_DISTANCE = 1200,
-			DISTANCE_TO_AUTOZONE = 6000; //Encoder ticks
-	private final double TIME_TO_AUTOZONE = 3;  //Seconds
-	private final double CLAW_CLEARANCE_DISTANCE = 12, TOTE_DISTANCE_BEFORE_GAP = 10, 
-			TOTE_DISTANCE_IN_GAP = 5; //Inches
+	private final double DISTANCE_FOR_TURN = 1100, BACKUP_DISTANCE = 0,
+			DISTANCE_TO_AUTOZONE = 6720; //Encoder ticks
+	private final double TIME_TO_AUTOZONE = 3.25;  //Seconds
+	private final double CLAW_CLEARANCE_DISTANCE = 18, TOTE_DISTANCE_BEFORE_GAP = 10.5, 
+			TOTE_DISTANCE_IN_GAP = 3.5; //Inches
 	private final double voltageRange = 0;
 	
     public AutonomousGroup(int mode) {
@@ -23,37 +26,62 @@ public class AutonomousGroup extends CommandGroup {
     	alignTote.addSequential(new ClawControl(ClawControl.CLOSE));
     	alignTote.addSequential(new ClawControl(ClawControl.OPEN));
     	
-    	switch(mode) {
-    	case 0:
+    	switch(getRoutine()) {
+    	case 1:
     		driveToAutozone();
     		break;
-    	case 1:
+    	case 2:
     		toteToAutozone();
     		break;
-    	case 2:
+    	case 3:
     		binToAutozone();
     		break;
-    	case 3:
+    	case 4:
     		binAndToteToAutozone();
     		break;
-    	case 4:
+    	case 5:
     		threeTotesToAutozone();
     		break;
-    	case 5:
+    	case 6:
     		binAndThreeTotesToAutozone();
     		break;
-    	case 6:
-    		testRoutine();
+    	case 7:
+    		testRoutine1();
+    	case 8:
+    		testRoutine2();
     		break;
     	}
     }
     
     public int getRoutine() {
-		return (int) Math.floor(Hardware.INSTANCE.autonomousSwitch.getAverageVoltage() / voltageRange);
+		double voltage = Hardware.INSTANCE.autoSwitch.getVoltage();
+		return (int) Math.floor((-20.0 / 11.0) * voltage + 9.5);
     }
     
-    public void testRoutine() {
-    	addSequential(new EncoderDrive(DISTANCE_FOR_TURN, EncoderDrive.TURN_RIGHT));
+    public void testRoutine1() {
+//    	addSequential(new ClawControl(ClawControl.CLOSE));  //Close on tote
+//    	addSequential(new Delay(1));
+//    	addParallel(new PositionElevator(Winch.TOTE_2));  //Lift the tote
+//    	addSequential(new Delay(1));
+//    	addSequential(new UltrasonicDrive(TOTE_DISTANCE_IN_GAP));
+//    	addParallel(new PositionElevator(Winch.TOTE_2 - Winch.TOTE_MID));
+//    	addSequential(new Delay(1));
+//    	addSequential(new ClawControl(ClawControl.OPEN));
+//    	addSequential(new UltrasonicDrive(CLAW_CLEARANCE_DISTANCE));
+//    	addParallel(new PositionElevator(Winch.TOTE_1));  //Lift the tote
+//    	addSequential(new Delay(1));
+//    	addSequential(new UltrasonicDrive(TOTE_DISTANCE_IN_GAP));
+//    	addSequential(new ClawControl(ClawControl.CLOSE));
+    	addSequential(new PositionElevator(2000));
+    }
+    
+    public void testRoutine2() {
+    	addSequential(new ClawControl(ClawControl.CLOSE));  //Close on tote
+    	addSequential(new Delay(1));
+    	addSequential(new EncoderDrive(DISTANCE_FOR_TURN, EncoderDrive.TURN_RIGHT)); //Turn towards the autozone
+    	addParallel(new PositionElevator(Winch.TOTE_2));  //Lift the tote
+    	addSequential(new Delay(1));
+    	Robot.drive.setLeftPosition(0);
     }
     
     public void driveToAutozone() {
@@ -64,9 +92,9 @@ public class AutonomousGroup extends CommandGroup {
     	addSequential(new ClawControl(ClawControl.CLOSE));  //Close on tote
     	addSequential(new Delay(1));
     	addSequential(new EncoderDrive(DISTANCE_FOR_TURN, EncoderDrive.TURN_RIGHT)); //Turn towards the autozone
-    	addParallel(new PositionElevator(Winch.TOTE_2));  //Lift the tote
+    	addParallel(new PositionElevator(Winch.TOTE_2 - Winch.TOTE_MID));  //Lift the tote
     	addSequential(new Delay(1));
-    	addSequential(new DriveForTime(TIME_TO_AUTOZONE, DriveForTime.DRIVE));  //Drive into the autozone
+    	addSequential(new EncoderDrive(DISTANCE_TO_AUTOZONE, DriveForTime.DRIVE));  //Drive into the autozone
     	addSequential(new PositionElevator(Winch.TOTE_1), 1); //Lower the tote
     	addSequential(new ClawControl(ClawControl.OPEN)); //Open the claw
     	addSequential(new EncoderDrive(BACKUP_DISTANCE, EncoderDrive.DRIVE)); //Back up slightly so we are not touching tote
@@ -75,8 +103,10 @@ public class AutonomousGroup extends CommandGroup {
     public void binToAutozone() {
     	addSequential(new ClawControl(ClawControl.CLOSE));  //Close on bin
     	addParallel(new PositionElevator(Winch.BIN_HEIGHT));  //Lift the bin
-    	addSequential(new EncoderDrive(DISTANCE_TO_AUTOZONE, EncoderDrive.DRIVE));  //Drive into the autozone
+    	addSequential(new Delay(1));
+    	addSequential(new DriveForTime(TIME_TO_AUTOZONE, DriveForTime.REVERSE));  //Drive into the autozone
     	addParallel(new PositionElevator(Winch.TOTE_1)); //Lower the bin
+    	addSequential(new Delay(1));
     	addSequential(new ClawControl(ClawControl.OPEN)); //Open the claw
     	addSequential(new EncoderDrive(BACKUP_DISTANCE, EncoderDrive.DRIVE)); //Back up slightly so we are not touching bin
     }

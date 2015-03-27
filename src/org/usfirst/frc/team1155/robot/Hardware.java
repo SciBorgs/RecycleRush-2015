@@ -13,9 +13,7 @@ public enum Hardware {
 	public DoubleSolenoid clawSolenoid;
 	public Joystick rightJoystick, leftJoystick, gamePad;
 	public DigitalInput bottomLimitSwitch;
-	public AnalogInput autonomousSwitch;
-	public DigitalInput ultrasonicIn;
-	public DigitalOutput ultrasonicOut;
+	public AnalogInput autoSwitch;
 	public Ultrasonic ultrasonic;
 	
 	
@@ -39,8 +37,8 @@ public enum Hardware {
 		clawSolenoid = new DoubleSolenoid(0, 1); //change channel to accommodate Pneumatics Control Module
 
 		bottomLimitSwitch = new DigitalInput(0);
-		autonomousSwitch = new AnalogInput(3);
-		ultrasonic = new Ultrasonic(4,3);
+		autoSwitch = new AnalogInput(1);
+		ultrasonic = new Ultrasonic(2, 1);
 		
 	}
 		

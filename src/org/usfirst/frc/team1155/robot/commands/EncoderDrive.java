@@ -9,7 +9,7 @@ public class EncoderDrive extends Command {
 	private double distance;
 	private int curMode;
 	public static final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2, BUFFER = 0;
-	public static final float SPEED = 0.3f;
+	public static final float SPEED = 0.4f;
 	
 	public EncoderDrive(double tickDistance, int mode) {
 		requires(Robot.drive);

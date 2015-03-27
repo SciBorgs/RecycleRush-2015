@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Winch extends Subsystem {
-	public static final double TOTE_1 = 0, TOTE_2 = 1500, TOTE_3 = 3000, TOTE_4 = 4500, BIN_HEIGHT = 2000; //where Winch should go before closing
+	public static final double TOTE_1 = 0, TOTE_2 = 2100, TOTE_3 = 3000, TOTE_4 = 4500, 
+			BIN_HEIGHT = 1700, TOTE_MID = 500; //where Winch should go before closing
 	private CANTalon mainTalon, assistTalon;
 	
 	public Winch() {
@@ -21,7 +22,7 @@ public class Winch extends Subsystem {
 			mainTalon.changeControlMode(CANTalon.ControlMode.Position);
 			//Set feedback device to the Analog Encoder and set PID
 			mainTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-			mainTalon.setPID(0.4, 0, 0);
+			mainTalon.setPID(1, 0, 0);
 		}
 		else {
 			mainTalon.changeControlMode(CANTalon.ControlMode.PercentVbus);
@@ -36,7 +37,7 @@ public class Winch extends Subsystem {
 	
 	public void setPIDMode(boolean positionMode) {
 		if(positionMode) {
-			mainTalon.setPID(0.4, 0, 0);
+			mainTalon.setPID(0.6, 0, 0);
 		}
 		else {
 			mainTalon.setPID(1, 0, 0);

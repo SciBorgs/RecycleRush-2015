@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class OI extends Command {
 	
 	private Joystick gamePad;
-	private Button btnWinchPos1, btnWinchPos2, btnWinchPos3, btnWinchPos4, btnOpenClaw, btnCloseClaw, btnToggleCompressor;
+	private Button btnWinchPos1, btnWinchPos2, btnWinchPos3, btnWinchPos4, btnOpenClaw, btnCloseClaw, btnToggleCompressor, btnCalibrate;
 	private Command joystickDrive, moveElevator, calibrator;
 	
 	public OI() {

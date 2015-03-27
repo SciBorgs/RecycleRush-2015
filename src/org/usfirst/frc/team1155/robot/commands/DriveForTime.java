@@ -11,7 +11,7 @@ public class DriveForTime extends Command {
 
 	private long duration, startTime;
 	private int curMode;
-	public static final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2;
+	public static final int DRIVE = 0, TURN_LEFT = 1, TURN_RIGHT = 2, REVERSE = 3;
 	private final double SPEED = 0.3;
 	
     public DriveForTime(double duration, int mode) {
@@ -39,6 +39,9 @@ public class DriveForTime extends Command {
     		break;
     	case TURN_RIGHT:
     		Robot.drive.set(SPEED, -SPEED);
+    		break;
+    	case REVERSE:
+    		Robot.drive.set(-SPEED, -SPEED);
     		break;
     	}
     }

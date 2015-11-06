@@ -36,31 +36,31 @@ public class OI extends Command {
 	    
 	    joystickDrive = new JoystickDrive();
 	    moveElevator = new MoveElevator();
-	    calibrator = new CalibrateWinch();
+	    //calibrator = new CalibrateWinch();
 	}
 	
 	protected void initialize() {
 		//Start manual control of joystick and move
 		joystickDrive.start();
 		moveElevator.start();
-		calibrator.start();
+        //calibrator.start();
 		
 		//Set the triggers to a command
 
-	    btnWinchPos1.whenPressed(new PositionElevator(Winch.TOTE_1));
-	    btnWinchPos2.whenPressed(new PositionElevator(Winch.TOTE_2));
-	    btnWinchPos3.whenPressed(new PositionElevator(Winch.TOTE_3));
-	    btnWinchPos4.whenPressed(new PositionElevator(Winch.TOTE_4));
+//	    btnWinchPos1.whenPressed(new PositionElevator(Winch.TOTE_1));
+//	    btnWinchPos2.whenPressed(new PositionElevator(Winch.TOTE_2));
+//	    btnWinchPos3.whenPressed(new PositionElevator(Winch.TOTE_3));
+//	    btnWinchPos4.whenPressed(new PositionElevator(Winch.TOTE_4));
 		btnOpenClaw.whenPressed(new ClawControl(ClawControl.OPEN));
 		btnCloseClaw.whenPressed(new ClawControl(ClawControl.CLOSE));
 		btnToggleCompressor.whenPressed(new ToggleCompressor());
 	}
 	
 	protected void execute() {
-		if(!moveElevator.isRunning() && gamePad.getPOV() != -1) {
-			moveElevator.start();
-		}
-		if(!calibrator.isRunning()) calibrator.start();
+//		if(!moveElevator.isRunning() && gamePad.getPOV() != -1) {
+//			moveElevator.start();
+//		}
+//		if(!calibrator.isRunning()) calibrator.start();
 	}
 	
 	protected boolean isFinished() {

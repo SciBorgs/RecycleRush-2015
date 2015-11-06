@@ -4,6 +4,7 @@ import org.usfirst.frc.team1155.robot.Hardware;
 import org.usfirst.frc.team1155.robot.Robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,17 +12,19 @@ public class UltrasonicDrive extends Command {
 
 	private Ultrasonic ultrasonic;
 	private double distance, currentDistance;
-	private final double SPEED = 0.4, BUFFER = 2;
+	private boolean far;
+	private final double SPEED = 0.25, BUFFER = 2;
 
-	public UltrasonicDrive(double distance) {
+	public UltrasonicDrive(double distance, boolean far) {
 		this.distance = distance;
-		
+		this.far = far;
 		ultrasonic = Hardware.INSTANCE.ultrasonic;
 	}
 	
 	@Override
 	protected void initialize() {
 		Robot.drive.setMode(false);
+		Timer.delay(0.001);
 	}
 
 	@Override
@@ -37,7 +40,12 @@ public class UltrasonicDrive extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(distance - ultrasonic.getRangeInches()) < BUFFER;
+		if(far) {
+			return distance - ultrasonic.getRangeInches() <= 0;
+		}
+		else {
+			return ultrasonic.getRangeInches() - distance <= 0;
+		}
 	}
 
 	@Override

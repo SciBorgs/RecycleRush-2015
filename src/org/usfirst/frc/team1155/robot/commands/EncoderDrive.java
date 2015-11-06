@@ -42,6 +42,10 @@ public class EncoderDrive extends Command {
 
 	@Override
 	protected boolean isFinished() {
+		
+		if (curMode == TURN_RIGHT) {
+			return Math.abs(Robot.drive.getLeftPosition()) - distance > 0;
+		}
 		return Math.abs(Robot.drive.getLeftPosition()) - distance > 0;
 	}
 

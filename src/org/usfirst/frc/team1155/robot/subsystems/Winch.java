@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1155.robot.subsystems;
 
 import org.usfirst.frc.team1155.robot.Hardware;
+import org.usfirst.frc.team1155.robot.Robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,19 +15,19 @@ public class Winch extends Subsystem {
 		mainTalon = Hardware.INSTANCE.elevatorMainTalon;
 		assistTalon = Hardware.INSTANCE.elevatorAssistTalon;
 		
-		setPositionMode(false); //Winch defaults to speed mode
 	}
-	
-	public void setPositionMode(boolean positionMode) {
-		if(positionMode){
+	public void setTalonMode(String mode) {
+		switch (mode) {
+		case "position":
 			mainTalon.changeControlMode(CANTalon.ControlMode.Position);
-			//Set feedback device to the Analog Encoder and set PID
-			mainTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-			mainTalon.setPID(1, 0, 0);
-		}
-		else {
+			break;
+		case "voltage":
 			mainTalon.changeControlMode(CANTalon.ControlMode.PercentVbus);
-			mainTalon.set(0);
+			Robot.dash.putString("Mode" , "PercentVBus Enabled");
+			break;
+		default: 
+			mainTalon.changeControlMode(CANTalon.ControlMode.Speed);
+			break;
 		}
 		assistTalon.changeControlMode(CANTalon.ControlMode.Follower);
 		assistTalon.set(mainTalon.getDeviceID());
@@ -44,20 +45,15 @@ public class Winch extends Subsystem {
 		}
 	}
 	
-	public void setSpeed(double speed) {
-		mainTalon.set(speed);		
-	}
-	
-	public void setPosition(double position) {
-		if(position > 6200) mainTalon.set(6200);
-		else if(position < 0) mainTalon.set(0);
-		else mainTalon.set(position);
+	public void setValue(double value) {
+		mainTalon.set(value);
 		assistTalon.set(mainTalon.getDeviceID());
+		Robot.dash.putNumber("Value", value);
 	}
 	
-	public double getPosition() {
-		return mainTalon.getSetpoint();
-	}
+//	public double getPosition() {
+//		return mainTalon.getSetpoint();
+//	}
 	
 	public boolean getLimitSwitch() {
 		return Hardware.INSTANCE.bottomLimitSwitch.get();

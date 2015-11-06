@@ -6,8 +6,8 @@ public class Delay extends Command {
 
 	long delay;
 	long startTime;
-	public Delay(int delay) {
-		this.delay = delay * (int) Math.pow(10, 9);
+	public Delay(double d) {
+		this.delay = (long) (d * (int) Math.pow(10, 9));
 	}
 	
 	@Override

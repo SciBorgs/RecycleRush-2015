@@ -19,17 +19,30 @@ public class MoveElevator extends Command {
 		assistTalon = Hardware.INSTANCE.elevatorAssistTalon;
 		gamePad = Hardware.INSTANCE.gamePad;
 	}
-	
-	
+			
 	@Override
 	protected void initialize() {
 		//Set the mode of the winch
-		Robot.winch.setPositionMode(true);
+		Robot.winch.setTalonMode("voltage");
 		Robot.winch.setPIDMode(false);
 	}
 
 	@Override
 	protected void execute() {
+		double outputValue;
+		switch(gamePad.getPOV()) {
+		case 0: case 45: case 315:
+			outputValue = -0.6;
+			break;
+		case 180: case 135: case 215:
+			Robot.dash.putString("ButtonPressed", "it is");
+			outputValue = 0.6;
+			break;
+		default:
+			outputValue = 0.0;
+		}
+		Robot.winch.setValue(outputValue);
+		/*
 		double newPosition = Robot.winch.getPosition();
 		switch(gamePad.getPOV()) {
 		case 315: case 0: case 45:
@@ -46,7 +59,10 @@ public class MoveElevator extends Command {
 			//Robot.winch.setSpeed(0);
 			break;
 		}
-		Robot.winch.setPosition(newPosition);
+//		Robot.dash.putDouble("New Position", newPosition);
+//		Robot.dash.putDouble("Encoder Position", (double) mainTalon.getEncPosition());
+//		Robot.winch.setPosition(newPosition);
+		*/
 	}
 
 	@Override

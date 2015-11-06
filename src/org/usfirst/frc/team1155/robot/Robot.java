@@ -70,6 +70,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		dash.putNumber("ENCODER", Robot.drive.getLeftPosition());
 		Scheduler.getInstance().run();
+		System.out.println(Hardware.INSTANCE.ultrasonic.getRangeInches());
 	}
 	
 	public void teleopInit() {
@@ -87,7 +88,6 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void testPeriodic() {		
-		System.out.println(autonomous.getRoutine());
-		new SmartDashboard().putNumber("Auto Routine: ", autonomous.getRoutine());
+		System.out.println(Hardware.INSTANCE.ultrasonic.getRangeInches());
 	}
 }

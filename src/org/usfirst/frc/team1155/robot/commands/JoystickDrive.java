@@ -23,11 +23,18 @@ public class JoystickDrive extends Command{
 		backLeftTalon = Hardware.INSTANCE.backLeftTalon;
 		backRightTalon = Hardware.INSTANCE.backRightTalon;
 
-		rightJoystick = Hardware.INSTANCE.rightJoystick;
-		leftJoystick = Hardware.INSTANCE.leftJoystick;
+//		regular code:
+//		rightJoystick = Hardware.INSTANCE.rightJoystick;
+//		leftJoystick = Hardware.INSTANCE.leftJoystick;
 		
-		rightTrigger = new JoystickButton(rightJoystick, 1);
-		leftTrigger = new JoystickButton(leftJoystick, 1);
+		//open house code:
+		rightJoystick = Hardware.INSTANCE.gamePad;
+		leftJoystick = Hardware.INSTANCE.gamePad;
+		
+//		official code:
+//		rightTrigger = new JoystickButton(rightJoystick, 1);
+//		leftTrigger = new JoystickButton(leftJoystick, 1);
+		
 		btnSlowLeft = new JoystickButton(leftJoystick, 3);
 		btnSlowRight = new JoystickButton(rightJoystick, 3);
 	}
@@ -44,23 +51,30 @@ public class JoystickDrive extends Command{
 
 	@Override
 	protected void execute() {
-		rightVal = changeTo(rightVal, rightJoystick.getY());
-		leftVal = changeTo(leftVal, leftJoystick.getY());
-		if(rightTrigger.get() || leftTrigger.get()) {
+		rightVal = changeTo(rightVal, rightJoystick.getRawAxis(5));
+		leftVal = changeTo(leftVal, leftJoystick.getRawAxis(1));
+//		if(rightTrigger.get() || leftTrigger.get()) {
+//			leftVal = rightVal;
+//		}
+		if(rightJoystick.getRawAxis(3) > 0.2) {
 			leftVal = rightVal;
 		}
-		if(btnSlowLeft.get() || btnSlowRight.get()) {
+		if(leftJoystick.getRawAxis(2) > 0.2) {
 			leftVal *= 0.4;
 			rightVal *= 0.4;
 		}
-		else {
-			leftVal *= 0.7;
-			rightVal *= 0.7;
-		}
+//		if(btnSlowLeft.get() || btnSlowRight.get()) {
+//			leftVal *= 0.4;
+//			rightVal *= 0.4;
+//		}
+//		else {
+//			leftVal *= 0.7;
+//			rightVal *= 0.7;
+//		}
 		if (rightVal == 0 && leftVal == 0) {
 			Robot.drive.set(0, 0);
 		} else {
-			Robot.drive.set(-leftVal, -rightVal);
+			Robot.drive.set(-.5*leftVal, -.5*rightVal);
 		}
 		
 	}

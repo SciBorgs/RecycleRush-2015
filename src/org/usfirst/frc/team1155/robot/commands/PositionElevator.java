@@ -17,14 +17,14 @@ public class PositionElevator extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.winch.setPositionMode(true);
+		Robot.winch.setTalonMode("position");
 		Robot.winch.setPIDMode(true);
 	}
 
 	@Override
 	protected void execute() {
 		System.out.println("Going to" + targetHeight);
-		Robot.winch.setPosition(targetHeight);
+		Robot.winch.setValue(targetHeight);
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class PositionElevator extends Command {
 	@Override
 	protected void end() {
 		if(mainTalon.getSpeed() > 0) {
-			mainTalon.changeControlMode(CANTalon.ControlMode.Speed);
-			mainTalon.set(0);
+			Robot.winch.setTalonMode("speed");
+			Robot.winch.setValue(0);
 		}
 	}
 
